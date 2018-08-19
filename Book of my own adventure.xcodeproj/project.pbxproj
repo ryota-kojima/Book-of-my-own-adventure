@@ -12,6 +12,11 @@
 		2BEC6EFD2127377C002A0D35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6EFB2127377C002A0D35 /* Main.storyboard */; };
 		2BEC6EFF2127377D002A0D35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6EFE2127377D002A0D35 /* Assets.xcassets */; };
 		2BEC6F022127377D002A0D35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6F002127377D002A0D35 /* LaunchScreen.storyboard */; };
+		2BEC6F0B2127487B002A0D35 /* tableviewDrangSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6F0A2127487B002A0D35 /* tableviewDrangSort.swift */; };
+		2BEC6F0E2127B80B002A0D35 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6F0D2127B80B002A0D35 /* Task.swift */; };
+		2BEC6F122127BC08002A0D35 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6F102127BC08002A0D35 /* TaskTableViewCell.swift */; };
+		2BEC6F132127BC08002A0D35 /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6F112127BC08002A0D35 /* TaskTableViewCell.xib */; };
+		6AE13F47A67C804FA6185345 /* Pods_Book_of_my_own_adventure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231AB67AED67C2EA2ED11 /* Pods_Book_of_my_own_adventure.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,13 @@
 		2BEC6EFE2127377D002A0D35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BEC6F012127377D002A0D35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BEC6F032127377D002A0D35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BEC6F0A2127487B002A0D35 /* tableviewDrangSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableviewDrangSort.swift; sourceTree = "<group>"; };
+		2BEC6F0D2127B80B002A0D35 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		2BEC6F102127BC08002A0D35 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		2BEC6F112127BC08002A0D35 /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
+		6DD231AB67AED67C2EA2ED11 /* Pods_Book_of_my_own_adventure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Book_of_my_own_adventure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC791C5F27406C07F9A9CACA /* Pods-Book of my own adventure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Book of my own adventure.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Book of my own adventure/Pods-Book of my own adventure.debug.xcconfig"; sourceTree = "<group>"; };
+		D71EB3A7A97E1AFCCBA95A21 /* Pods-Book of my own adventure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Book of my own adventure.release.xcconfig"; path = "Pods/Target Support Files/Pods-Book of my own adventure/Pods-Book of my own adventure.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +41,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AE13F47A67C804FA6185345 /* Pods_Book_of_my_own_adventure.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		282DA51BF430178402391182 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DD231AB67AED67C2EA2ED11 /* Pods_Book_of_my_own_adventure.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2BEC6EEB2127377C002A0D35 = {
 			isa = PBXGroup;
 			children = (
 				2BEC6EF62127377C002A0D35 /* Book of my own adventure */,
 				2BEC6EF52127377C002A0D35 /* Products */,
+				9493F4724F906D46815ECF58 /* Pods */,
+				282DA51BF430178402391182 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +77,9 @@
 		2BEC6EF62127377C002A0D35 /* Book of my own adventure */ = {
 			isa = PBXGroup;
 			children = (
+				2BEC6F0F2127BBE4002A0D35 /* CustomUI */,
+				2BEC6F0C2127B7F5002A0D35 /* DataBase */,
+				2BEC6F0921274840002A0D35 /* Extention */,
 				2BEC6EF72127377C002A0D35 /* AppDelegate.swift */,
 				2BEC6EF92127377C002A0D35 /* ViewController.swift */,
 				2BEC6EFB2127377C002A0D35 /* Main.storyboard */,
@@ -64,6 +90,40 @@
 			path = "Book of my own adventure";
 			sourceTree = "<group>";
 		};
+		2BEC6F0921274840002A0D35 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				2BEC6F0A2127487B002A0D35 /* tableviewDrangSort.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		2BEC6F0C2127B7F5002A0D35 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				2BEC6F0D2127B80B002A0D35 /* Task.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		2BEC6F0F2127BBE4002A0D35 /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				2BEC6F102127BC08002A0D35 /* TaskTableViewCell.swift */,
+				2BEC6F112127BC08002A0D35 /* TaskTableViewCell.xib */,
+			);
+			path = CustomUI;
+			sourceTree = "<group>";
+		};
+		9493F4724F906D46815ECF58 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BC791C5F27406C07F9A9CACA /* Pods-Book of my own adventure.debug.xcconfig */,
+				D71EB3A7A97E1AFCCBA95A21 /* Pods-Book of my own adventure.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +131,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2BEC6F062127377D002A0D35 /* Build configuration list for PBXNativeTarget "Book of my own adventure" */;
 			buildPhases = (
+				0C627728A622212829D083CB /* [CP] Check Pods Manifest.lock */,
 				2BEC6EF02127377C002A0D35 /* Sources */,
 				2BEC6EF12127377C002A0D35 /* Frameworks */,
 				2BEC6EF22127377C002A0D35 /* Resources */,
+				F28E1045FA991C685D32C8D7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -122,6 +184,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BEC6F132127BC08002A0D35 /* TaskTableViewCell.xib in Resources */,
 				2BEC6F022127377D002A0D35 /* LaunchScreen.storyboard in Resources */,
 				2BEC6EFF2127377D002A0D35 /* Assets.xcassets in Resources */,
 				2BEC6EFD2127377C002A0D35 /* Main.storyboard in Resources */,
@@ -130,11 +193,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0C627728A622212829D083CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Book of my own adventure-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F28E1045FA991C685D32C8D7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Book of my own adventure/Pods-Book of my own adventure-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftReorder/SwiftReorder.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftReorder.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Book of my own adventure/Pods-Book of my own adventure-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2BEC6EF02127377C002A0D35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BEC6F0E2127B80B002A0D35 /* Task.swift in Sources */,
+				2BEC6F0B2127487B002A0D35 /* tableviewDrangSort.swift in Sources */,
+				2BEC6F122127BC08002A0D35 /* TaskTableViewCell.swift in Sources */,
 				2BEC6EFA2127377C002A0D35 /* ViewController.swift in Sources */,
 				2BEC6EF82127377C002A0D35 /* AppDelegate.swift in Sources */,
 			);
@@ -278,6 +387,7 @@
 		};
 		2BEC6F072127377D002A0D35 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC791C5F27406C07F9A9CACA /* Pods-Book of my own adventure.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,6 +406,7 @@
 		};
 		2BEC6F082127377D002A0D35 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D71EB3A7A97E1AFCCBA95A21 /* Pods-Book of my own adventure.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
