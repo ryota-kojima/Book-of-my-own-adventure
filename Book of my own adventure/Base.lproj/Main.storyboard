@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="komorebi-gothic-P.ttf">
+            <string>komorebi-gothic-P</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -18,21 +23,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Ip-Re-9gM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="6Ip-Re-9gM">
+                                <rect key="frame" x="0.0" y="73" width="375" height="594"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSQ-Vb-EqM">
+                                <rect key="frame" x="0.0" y="20" width="375" height="53"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lv:5" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8v-BZ-VUz">
+                                        <rect key="frame" x="10" y="16" width="32" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aie-Vr-dld">
+                                        <rect key="frame" x="335" y="9.5" width="30" height="34"/>
+                                        <state key="normal" title="＋">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addTopButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lVY-FM-Ub7"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="自分の夢を入力しよう" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AAF-ZR-y7v">
+                                        <rect key="frame" x="52" y="0.0" width="273" height="53"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.6074247397846152" blue="0.2300637015773368" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Aie-Vr-dld" firstAttribute="leading" secondItem="AAF-ZR-y7v" secondAttribute="trailing" constant="10" id="5Nx-KI-oR8"/>
+                                    <constraint firstItem="AAF-ZR-y7v" firstAttribute="centerY" secondItem="F8v-BZ-VUz" secondAttribute="centerY" id="76f-O9-RkQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="AAF-ZR-y7v" secondAttribute="bottom" id="Dvl-Y0-lkG"/>
+                                    <constraint firstAttribute="height" constant="53" id="JQS-pE-crQ"/>
+                                    <constraint firstItem="F8v-BZ-VUz" firstAttribute="leading" secondItem="tSQ-Vb-EqM" secondAttribute="leading" constant="10" id="LiM-jR-e1i"/>
+                                    <constraint firstAttribute="trailing" secondItem="Aie-Vr-dld" secondAttribute="trailing" constant="10" id="NOX-N5-UY5"/>
+                                    <constraint firstItem="Aie-Vr-dld" firstAttribute="centerY" secondItem="F8v-BZ-VUz" secondAttribute="centerY" id="bZY-tl-LQh"/>
+                                    <constraint firstItem="AAF-ZR-y7v" firstAttribute="top" secondItem="tSQ-Vb-EqM" secondAttribute="top" id="oDJ-I7-CwR"/>
+                                    <constraint firstItem="AAF-ZR-y7v" firstAttribute="leading" secondItem="F8v-BZ-VUz" secondAttribute="trailing" constant="10" id="uUt-Hg-6ZZ"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6Ip-Re-9gM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Hi0-Tn-DLz"/>
-                            <constraint firstItem="6Ip-Re-9gM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="KE7-hF-jZs"/>
-                            <constraint firstItem="6Ip-Re-9gM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="KwH-as-wXG"/>
-                            <constraint firstItem="6Ip-Re-9gM" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="YpH-Qr-xpg"/>
+                            <constraint firstItem="6Ip-Re-9gM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GhB-qi-Sz9"/>
+                            <constraint firstAttribute="bottom" secondItem="6Ip-Re-9gM" secondAttribute="bottom" id="MVw-BT-ZZH"/>
+                            <constraint firstAttribute="trailing" secondItem="6Ip-Re-9gM" secondAttribute="trailing" id="N8P-bu-Xuc"/>
+                            <constraint firstItem="tSQ-Vb-EqM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aNw-RX-bT9"/>
+                            <constraint firstItem="tSQ-Vb-EqM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="kiq-Hl-n0s"/>
+                            <constraint firstItem="tSQ-Vb-EqM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="nk6-j3-yPv"/>
+                            <constraint firstItem="6Ip-Re-9gM" firstAttribute="top" secondItem="tSQ-Vb-EqM" secondAttribute="bottom" id="obV-DG-H4f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="DreamtextField" destination="AAF-ZR-y7v" id="UZW-fi-Ucw"/>
+                        <outlet property="LevelLabel" destination="F8v-BZ-VUz" id="wy9-5A-OeZ"/>
+                        <outlet property="TopView" destination="tSQ-Vb-EqM" id="A0T-PF-eza"/>
                         <outlet property="tableView" destination="6Ip-Re-9gM" id="752-9J-W5D"/>
                     </connections>
                 </viewController>

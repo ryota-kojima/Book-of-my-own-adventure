@@ -12,17 +12,21 @@ protocol TableViewCellDelegate {
     func cellDidBeginEditing(editingCell: TaskTableViewCell)
     // Indicates that the edit process has committed for the given cell
     func cellDidEndEditing(editingCell: TaskTableViewCell)
+    
 }
 
 import UIKit
 import RealmSwift
+import MCSwipeTableViewCell
 
-class TaskTableViewCell: UITableViewCell,UITextFieldDelegate{
+class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
 
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textField: UITextView!
+    
     
     var delegate: TableViewCellDelegate?
     var task:Task!
+    var tableview: UITableView!
     let realm = try! Realm()
     
     
@@ -31,8 +35,10 @@ class TaskTableViewCell: UITableViewCell,UITextFieldDelegate{
         // Initialization code
         
         textField.delegate = self
-        textField.becomeFirstResponder()
+        textField.font = UIFont.boldSystemFont(ofSize: CGFloat(24))
+        textField.layer.borderWidth = 0
         
+        textField.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
         
     }
 
@@ -40,36 +46,63 @@ class TaskTableViewCell: UITableViewCell,UITextFieldDelegate{
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
     }
     
     
-    func setCell(_ task:Task){
+    func setCell(){
         textField.text = task.text
+        
+        if self.task.editCell{
+            
+            print("呼ばれたで")
+            
+            self.textField.becomeFirstResponder()
+            
+            try! realm.write {
+                self.task.editCell = false
+            }
+        }
+        
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return false
-    }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if (text == "\n") {
+            //あなたのテキストフィールド
+            textField.resignFirstResponder()
+            return false
+        }
+        return true
+    }
     //テキストフィールドが閉じられたら、データを追加、EndEditingを呼ぶ
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         if textField.text != ""{
         try! realm.write {
             self.task.text = textField.text!
             }
-        }
+        }else{
+                try! realm.write {
+                    self.realm.delete(task)
+                }
+            }
         
         if delegate != nil {
             delegate?.cellDidEndEditing(editingCell:self)
         }
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textViewDidBeginEditing(_ textField: UITextView) {
         if delegate != nil {
-            delegate!.cellDidBeginEditing(editingCell:self)
+            delegate?.cellDidBeginEditing(editingCell:self)
         }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        tableview.beginUpdates()
+        tableview.endUpdates()
     }
     
     

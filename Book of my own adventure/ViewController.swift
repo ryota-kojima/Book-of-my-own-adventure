@@ -9,8 +9,9 @@
 import UIKit
 import SwiftReorder
 import RealmSwift
+import MCSwipeTableViewCell
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,TableViewCellDelegate {
+class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,TableViewCellDelegate,UITextFieldDelegate {
     
 
     @IBOutlet weak var tableView: UITableView!
@@ -18,13 +19,33 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //Realmのインスタンス
     let realm = try! Realm()
     let task = try! Realm().objects(Task.self).sorted(byKeyPath: "order", ascending: true)
+    var cellColor: UIColor!
     
+    @IBOutlet weak var TopView: UIView!
+    @IBOutlet weak var LevelLabel: UILabel!
+    
+    @IBOutlet weak var DreamtextField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        DreamtextField.delegate = self
+        
+        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 175, right: 0)
+        
+        //テーブル行の高さをAutoLayoutで自動調整する
+        tableView.rowHeight = UITableViewAutomaticDimension
+        //tableviewのおおよその高さを導き出す。これでスクロールの値などが予測される
+        //高さ概算値 = 「縦横比1:1のUIImageViewの高さ(=画面幅)」+「いいねボタン、キャプションラベル、その他余白の高さの合計概算(=100pt)」
+        tableView.estimatedRowHeight = 10000
+        
+        //ステータスバーの色を変更
+        let statusBar = UIView(frame:CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 20.0))
+        statusBar.backgroundColor = UIColor.black
+        
+        view.addSubview(statusBar)
         
         
         //nibファイルの生成
@@ -40,6 +61,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -50,6 +76,31 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    
+    @IBAction func addTopButton(_ sender: Any) {
+        
+        print("DEBUG_PRINT:addCell")
+        //タスクの設定とリストの追加
+        let taskdata = Task()
+        
+        let allTask = realm.objects(Task.self)
+        if allTask.count != 0{
+            taskdata.id = allTask.max(ofProperty: "id")!+1
+            
+            taskdata.order = allTask.min(ofProperty: "order")!-1
+        }
+        
+        taskdata.editCell = true
+        
+        try! realm.write {
+            self.realm.add(taskdata,update:true)
+        }
+        
+        self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+        
+        
+    }
+    
     
     
     @objc func addCell(){
@@ -65,15 +116,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             taskdata.order = allTask.max(ofProperty: "order")!+1
         }
         
+        taskdata.editCell = true
         
         try! realm.write {
             self.realm.add(taskdata,update:true)
         }
-        
-       tableView.reloadData()
-        
-        
-        
+        self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
         
     }
     
@@ -85,6 +133,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         if let spacer = tableView.reorder.spacerCell(for: indexPath) {
             return spacer
         }
@@ -94,42 +143,112 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let taskdata = task[indexPath.row]
         
         cell.task = (taskdata)
-        cell.setCell(taskdata)
         cell.delegate = self
         
-        
         cell.selectionStyle = UITableViewCellSelectionStyle.none
+        
+        cell.tableview = self.tableView
+        cell.setCell()
         
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let destructiveAction = UIContextualAction(style: .destructive,
+                                                   title: "Delete") { (action, view, completionHandler) in
+                                                    completionHandler(true)
+                                                    try! self.realm.write {
+                                                        self.realm.delete(self.task[indexPath.row])
+                                                    }
+                                                    //削除のアニメーション入れてから、データを更新。
+                                                    UIView.animate(withDuration: 0, animations: {
+                                                        tableView.deleteRows(at: [indexPath], with: .fade)
+                                                    }, completion: {finished in
+                                                        if (finished){
+                                                            tableView.reloadData()
+                                                        }
+                                                    })
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
+       
+        return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        //チェックマークの画像を挿入予定
+        
+        let destructiveAction = UIContextualAction(style: .destructive,
+                                                   title: "") { (action, view, completionHandler) in
+                                                    completionHandler(true)
+                                                    try! self.realm.write {
+                                                        self.realm.delete(self.task[indexPath.row])
+                                                    }
+                                                    UIView.animate(withDuration: 0, animations: {
+                                                        tableView.deleteRows(at: [indexPath], with: .fade)
+                                                    }, completion: {finished in
+                                                        if (finished){
+                                                            tableView.reloadData()
+                                                        }
+                                                        
+                                                    })
+                                                    
+                                                    
+        }
+        
+        destructiveAction.backgroundColor = UIColor(red: 0, green: 255, blue: 0, alpha: 1)
+        let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
+        
+        return configuration
+    }
     
     
     
     func cellDidBeginEditing(editingCell: TaskTableViewCell) {
-        let editingOffset = self.tableView.contentOffset.y - editingCell.frame.origin.y as CGFloat
-        let visibleCells = self.tableView.visibleCells as! [TaskTableViewCell]
-        for cell in visibleCells {
-            UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                cell.transform = CGAffineTransform(translationX: 0, y: editingOffset)
-                if cell != editingCell {
-                    cell.alpha = 0.3
-                }
-            })
-        }
         
+        
+        DispatchQueue.main.async {
+            
+        
+        let editingOffset = self.TopView.frame.size.height + self.tableView.contentOffset.y - editingCell.frame.origin.y as CGFloat - 50
+        let visibleCells = self.tableView.visibleCells as! [TaskTableViewCell]
+        
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
+          self.tableView.transform = CGAffineTransform(translationX: 0, y: editingOffset)
+        })
+        for cell in visibleCells {
+            
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                //cell.transform = CGAffineTransform(translationX: 0, y: editingOffset)
+
+                if cell != editingCell {
+                    
+                    self.cellColor = cell.backgroundColor!
+                    
+                    cell.contentView.alpha = 0.3
+                    }
+                })
+            }
+        }
     }
     
     func cellDidEndEditing(editingCell: TaskTableViewCell) {
         
         let visibleCells = tableView.visibleCells as! [TaskTableViewCell]
         let lastView = visibleCells[visibleCells.count - 1] as TaskTableViewCell
+        
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
+            self.tableView.transform = CGAffineTransform.identity
+        })
+        
         for cell: TaskTableViewCell in visibleCells {
             UIView.animate(withDuration: 0.3, animations: { () -> Void in
                 cell.transform = CGAffineTransform.identity
                 if cell != editingCell {
-                    cell.alpha = 1.0
+                    cell.contentView.alpha = 1.0
+                    
                 }
             }, completion: { (Finished: Bool) -> Void in
                 if cell == lastView {

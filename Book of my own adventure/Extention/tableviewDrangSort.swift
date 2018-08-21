@@ -26,7 +26,8 @@ extension ViewController: TableViewReorderDelegate {
             sourceObject.order = destinationObjectOrder
             
         }
-        
-        tableView.reloadData()
+    
+        //tableView.reloadData()
     }
 }
+

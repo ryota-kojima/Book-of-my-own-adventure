@@ -18,14 +18,12 @@ class Task:Object{
     
     @objc dynamic var order = 0
     
+    @objc dynamic var editCell = false
+    
     @objc dynamic var date=Date()
     
     //Idをプライマリーキーに設定
     override static func primaryKey()->String?{
         return "id"
     }
-}
-
-class TaskWrapper:Object{
-    let list = List<Task>()
 }

@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="komorebi-gothic-P.ttf">
+            <string>komorebi-gothic-P</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,18 +24,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kD4-tt-olo">
-                        <rect key="frame" x="10" y="10" width="300" height="23.5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <nil key="textColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-nc-AVM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="24"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                    </textView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="j9m-nc-AVM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9PW-Ev-hpl"/>
+                    <constraint firstAttribute="bottom" secondItem="j9m-nc-AVM" secondAttribute="bottom" id="IgW-TD-2c1"/>
+                    <constraint firstAttribute="trailing" secondItem="j9m-nc-AVM" secondAttribute="trailing" id="hjz-qb-49S"/>
+                    <constraint firstItem="j9m-nc-AVM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="kaJ-u1-fOb"/>
+                </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="textField" destination="kD4-tt-olo" id="AeX-3d-tt8"/>
+                <outlet property="textField" destination="j9m-nc-AVM" id="EbP-mo-aYh"/>
             </connections>
         </tableViewCell>
     </objects>

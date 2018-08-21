@@ -16,6 +16,8 @@
 		2BEC6F0E2127B80B002A0D35 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6F0D2127B80B002A0D35 /* Task.swift */; };
 		2BEC6F122127BC08002A0D35 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6F102127BC08002A0D35 /* TaskTableViewCell.swift */; };
 		2BEC6F132127BC08002A0D35 /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6F112127BC08002A0D35 /* TaskTableViewCell.xib */; };
+		2BEC6F15212AAFDA002A0D35 /* TableviewHeader0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6F14212AAFDA002A0D35 /* TableviewHeader0.swift */; };
+		2BEC6F17212AB59E002A0D35 /* komorebi-gothic-P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6F16212AB59E002A0D35 /* komorebi-gothic-P.ttf */; };
 		6AE13F47A67C804FA6185345 /* Pods_Book_of_my_own_adventure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231AB67AED67C2EA2ED11 /* Pods_Book_of_my_own_adventure.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +33,8 @@
 		2BEC6F0D2127B80B002A0D35 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		2BEC6F102127BC08002A0D35 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		2BEC6F112127BC08002A0D35 /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
+		2BEC6F14212AAFDA002A0D35 /* TableviewHeader0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableviewHeader0.swift; sourceTree = "<group>"; };
+		2BEC6F16212AB59E002A0D35 /* komorebi-gothic-P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "komorebi-gothic-P.ttf"; sourceTree = "<group>"; };
 		6DD231AB67AED67C2EA2ED11 /* Pods_Book_of_my_own_adventure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Book_of_my_own_adventure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC791C5F27406C07F9A9CACA /* Pods-Book of my own adventure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Book of my own adventure.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Book of my own adventure/Pods-Book of my own adventure.debug.xcconfig"; sourceTree = "<group>"; };
 		D71EB3A7A97E1AFCCBA95A21 /* Pods-Book of my own adventure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Book of my own adventure.release.xcconfig"; path = "Pods/Target Support Files/Pods-Book of my own adventure/Pods-Book of my own adventure.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +90,7 @@
 				2BEC6EFE2127377D002A0D35 /* Assets.xcassets */,
 				2BEC6F002127377D002A0D35 /* LaunchScreen.storyboard */,
 				2BEC6F032127377D002A0D35 /* Info.plist */,
+				2BEC6F16212AB59E002A0D35 /* komorebi-gothic-P.ttf */,
 			);
 			path = "Book of my own adventure";
 			sourceTree = "<group>";
@@ -94,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				2BEC6F0A2127487B002A0D35 /* tableviewDrangSort.swift */,
+				2BEC6F14212AAFDA002A0D35 /* TableviewHeader0.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -188,6 +194,7 @@
 				2BEC6F022127377D002A0D35 /* LaunchScreen.storyboard in Resources */,
 				2BEC6EFF2127377D002A0D35 /* Assets.xcassets in Resources */,
 				2BEC6EFD2127377C002A0D35 /* Main.storyboard in Resources */,
+				2BEC6F17212AB59E002A0D35 /* komorebi-gothic-P.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,12 +226,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Book of my own adventure/Pods-Book of my own adventure-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MCSwipeTableViewCell/MCSwipeTableViewCell.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftReorder/SwiftReorder.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MCSwipeTableViewCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftReorder.framework",
@@ -242,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BEC6F0E2127B80B002A0D35 /* Task.swift in Sources */,
+				2BEC6F15212AAFDA002A0D35 /* TableviewHeader0.swift in Sources */,
 				2BEC6F0B2127487B002A0D35 /* tableviewDrangSort.swift in Sources */,
 				2BEC6F122127BC08002A0D35 /* TaskTableViewCell.swift in Sources */,
 				2BEC6EFA2127377C002A0D35 /* ViewController.swift in Sources */,
