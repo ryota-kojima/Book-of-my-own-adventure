@@ -1,0 +1,30 @@
+PODS:
+  - MCSwipeTableViewCell (2.1.4)
+  - Realm (3.7.4):
+    - Realm/Headers (= 3.7.4)
+  - Realm/Headers (3.7.4)
+  - RealmSwift (3.7.4):
+    - Realm (= 3.7.4)
+  - SwiftReorder (3.2.0)
+
+DEPENDENCIES:
+  - MCSwipeTableViewCell (= 2.1.4)
+  - RealmSwift (= 3.7.4)
+  - SwiftReorder (~> 3.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MCSwipeTableViewCell
+    - Realm
+    - RealmSwift
+    - SwiftReorder
+
+SPEC CHECKSUMS:
+  MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
+  Realm: a469bb59e33f9926102ccaea4349822c53b9117e
+  RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
+  SwiftReorder: 27d737099efd6125339d5e8cb090e46c67341143
+
+PODFILE CHECKSUM: 0cb6eed6895f540250636f033517eae754f25189
+
+COCOAPODS: 1.5.3
