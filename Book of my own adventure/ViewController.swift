@@ -21,9 +21,11 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     let task = try! Realm().objects(Task.self).sorted(byKeyPath: "order", ascending: true)
     var cellColor: UIColor!
     
+    let userDefaults:UserDefaults = UserDefaults.standard
+    var taskid:Task!
+    
     @IBOutlet weak var TopView: UIView!
     @IBOutlet weak var LevelLabel: UILabel!
-    
     @IBOutlet weak var DreamtextField: UITextField!
     
     
@@ -39,7 +41,7 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         tableView.rowHeight = UITableViewAutomaticDimension
         //tableviewのおおよその高さを導き出す。これでスクロールの値などが予測される
         //高さ概算値 = 「縦横比1:1のUIImageViewの高さ(=画面幅)」+「いいねボタン、キャプションラベル、その他余白の高さの合計概算(=100pt)」
-        tableView.estimatedRowHeight = 10000
+        tableView.estimatedRowHeight = 1000
         
         //ステータスバーの色を変更
         let statusBar = UIView(frame:CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 20.0))
@@ -66,6 +68,11 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        userDefaults.set(DreamtextField.text, forKey: "DREAM")
+        userDefaults.synchronize()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -75,6 +82,14 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        let dream = userDefaults.string(forKey: "DREAM")
+        DreamtextField.text = dream
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let secondViewController: SeondViewController! = segue.destination as! SeondViewController
+        
+        secondViewController.taskid = self.taskid
     }
     
     @IBAction func addTopButton(_ sender: Any) {
@@ -98,6 +113,11 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         
         self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
         
+        
+        
+    }
+    
+    @IBAction func unwind(segue: UIStoryboardSegue){
         
     }
     
@@ -150,30 +170,79 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         cell.tableview = self.tableView
         cell.setCell()
         
+        cell.CategoryButton.addTarget(self, action: #selector(handleButton(_:forEvent:)), for: .touchUpInside)
+       
         
         return cell
     }
     
+    @objc func handleButton(_ sender:UIButton, forEvent event: UIEvent){
+        
+        let touch = event.allTouches?.first
+        let point = touch?.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: point!)
+        
+        taskid = task[indexPath!.row]
+        
+        performSegue(withIdentifier: "secondSegue", sender: nil)
+
+    }
+    
+   
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let destructiveAction = UIContextualAction(style: .destructive,
+        let destructiveAction = UIContextualAction(style: .normal,
                                                    title: "Delete") { (action, view, completionHandler) in
-                                                    completionHandler(true)
-                                                    try! self.realm.write {
-                                                        self.realm.delete(self.task[indexPath.row])
-                                                    }
-                                                    //削除のアニメーション入れてから、データを更新。
-                                                    UIView.animate(withDuration: 0, animations: {
-                                                        tableView.deleteRows(at: [indexPath], with: .fade)
-                                                    }, completion: {finished in
-                                                        if (finished){
-                                                            tableView.reloadData()
+                                                
+                                                    
+                                                    // ① UIAlertControllerクラスのインスタンスを生成
+                                                    // タイトル, メッセージ, Alertのスタイルを指定する
+                                                    // 第3引数のpreferredStyleでアラートの表示スタイルを指定する
+                                                    let alert: UIAlertController = UIAlertController(title: "カテゴリー内のすべてのタスクが削除されます", message: "削除してもよろしいですか？", preferredStyle:  UIAlertControllerStyle.alert)
+                                                    
+                                                    // ② Actionの設定
+                                                    // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
+                                                    // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
+                                                    // OKボタン
+                                                    let okAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
+                                                        // ボタンが押された時の処理を書く（クロージャ実装）
+                                                        
+                                                        (action: UIAlertAction!) -> Void in
+                                                        
+                                                        
+                                                        try! self.realm.write {
+                                                            self.realm.delete(self.task[indexPath.row])
                                                         }
+                                                        //削除のアニメーション入れてから、データを更新。
+                                                        UIView.animate(withDuration: 0, animations: {
+                                                            tableView.deleteRows(at: [indexPath], with: .fade)
+                                                        }, completion: {finished in
+                                                            if (finished){
+                                                                tableView.reloadData()
+                                                            }
+                                                        })
+                                                        
                                                     })
-        }
+                                                    
+                                                    // キャンセルボタン
+                                                    let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
+                                                        // ボタンが押された時の処理を書く（クロージャ実装）
+                                                        (action: UIAlertAction!) -> Void in
+                                                        
+                                                    })
+                                                    
+                                                    // ③ UIAlertControllerにActionを追加
+                                                    alert.addAction(cancelAction)
+                                                    alert.addAction(okAction)
+                                                    
+                                                    // ④ Alertを表示
+                                                        self.present(alert, animated: true, completion: nil)
         
+                                                     completionHandler(true)
+        }
+        destructiveAction.backgroundColor = UIColor(red: 214/255.0, green: 69/255.0, blue: 65/255.0, alpha: 1)
         let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
-       
         return configuration
     }
     
@@ -206,13 +275,15 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     
     
     
+    
+    
     func cellDidBeginEditing(editingCell: TaskTableViewCell) {
         
         
         DispatchQueue.main.async {
             
         
-        let editingOffset = self.TopView.frame.size.height + self.tableView.contentOffset.y - editingCell.frame.origin.y as CGFloat - 50
+        let editingOffset = self.tableView.contentOffset.y - editingCell.frame.origin.y as CGFloat
         let visibleCells = self.tableView.visibleCells as! [TaskTableViewCell]
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in

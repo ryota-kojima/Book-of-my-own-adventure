@@ -84,11 +84,104 @@
                         <outlet property="LevelLabel" destination="F8v-BZ-VUz" id="wy9-5A-OeZ"/>
                         <outlet property="TopView" destination="tSQ-Vb-EqM" id="A0T-PF-eza"/>
                         <outlet property="tableView" destination="6Ip-Re-9gM" id="752-9J-W5D"/>
+                        <segue destination="UG7-7x-mTl" kind="show" identifier="secondSegue" id="3wA-Bf-Ncp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+        <!--Seond View Controller-->
+        <scene sceneID="PDy-sE-RD8">
+            <objects>
+                <viewController storyboardIdentifier="Second" automaticallyAdjustsScrollViewInsets="NO" id="UG7-7x-mTl" customClass="SeondViewController" customModule="Book_of_my_own_adventure" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FMR-d9-qY2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="eZs-QY-ukH">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmA-25-bwe">
+                                <rect key="frame" x="0.0" y="73" width="375" height="35"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="6ST-tr-kDU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="20"/>
+                                <state key="normal" title="カテゴリ"/>
+                                <connections>
+                                    <segue destination="9Xo-Vs-ocW" kind="unwind" unwindAction="unwindWithSegue:" id="XbM-2w-fp6"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fST-1E-vsT">
+                                <rect key="frame" x="0.0" y="20" width="375" height="53"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lv:5" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xb6-z0-f4k">
+                                        <rect key="frame" x="10" y="16" width="32" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsX-WX-R1z">
+                                        <rect key="frame" x="335" y="9.5" width="30" height="34"/>
+                                        <state key="normal" title="＋">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addTopButton:" destination="UG7-7x-mTl" eventType="touchUpInside" id="3cP-Su-gM6"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="自分の夢を入力しよう" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5x6-2o-WTx">
+                                        <rect key="frame" x="52" y="0.0" width="273" height="53"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.6074247398" blue="0.2300637016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="5x6-2o-WTx" firstAttribute="centerY" secondItem="xb6-z0-f4k" secondAttribute="centerY" id="FWd-6h-JA4"/>
+                                    <constraint firstItem="dsX-WX-R1z" firstAttribute="leading" secondItem="5x6-2o-WTx" secondAttribute="trailing" constant="10" id="Giq-Uj-S6i"/>
+                                    <constraint firstItem="5x6-2o-WTx" firstAttribute="leading" secondItem="xb6-z0-f4k" secondAttribute="trailing" constant="10" id="LI7-Xj-Ch8"/>
+                                    <constraint firstAttribute="height" constant="53" id="UNe-W5-3tn"/>
+                                    <constraint firstItem="dsX-WX-R1z" firstAttribute="centerY" secondItem="xb6-z0-f4k" secondAttribute="centerY" id="Ywn-XD-zhQ"/>
+                                    <constraint firstItem="xb6-z0-f4k" firstAttribute="leading" secondItem="fST-1E-vsT" secondAttribute="leading" constant="10" id="aQa-n8-DLR"/>
+                                    <constraint firstAttribute="trailing" secondItem="dsX-WX-R1z" secondAttribute="trailing" constant="10" id="hDe-Ha-g8Q"/>
+                                    <constraint firstAttribute="bottom" secondItem="5x6-2o-WTx" secondAttribute="bottom" id="rOu-mu-WSX"/>
+                                    <constraint firstItem="5x6-2o-WTx" firstAttribute="top" secondItem="fST-1E-vsT" secondAttribute="top" id="waN-uM-025"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fST-1E-vsT" firstAttribute="top" secondItem="RCu-Xv-PG6" secondAttribute="top" id="8YE-Fi-MTb"/>
+                            <constraint firstAttribute="trailing" secondItem="eZs-QY-ukH" secondAttribute="trailing" id="8aD-Cz-hhO"/>
+                            <constraint firstItem="rmA-25-bwe" firstAttribute="top" secondItem="fST-1E-vsT" secondAttribute="bottom" id="Dzu-wG-9vF"/>
+                            <constraint firstAttribute="bottom" secondItem="eZs-QY-ukH" secondAttribute="bottom" id="Jjp-L2-Rqh"/>
+                            <constraint firstItem="eZs-QY-ukH" firstAttribute="leading" secondItem="FMR-d9-qY2" secondAttribute="leading" id="L6T-IX-PRf"/>
+                            <constraint firstItem="fST-1E-vsT" firstAttribute="trailing" secondItem="RCu-Xv-PG6" secondAttribute="trailing" id="NyG-aW-tnm"/>
+                            <constraint firstItem="eZs-QY-ukH" firstAttribute="top" secondItem="rmA-25-bwe" secondAttribute="bottom" id="Tq1-B7-SYe"/>
+                            <constraint firstItem="rmA-25-bwe" firstAttribute="trailing" secondItem="RCu-Xv-PG6" secondAttribute="trailing" id="a8s-Ua-zfV"/>
+                            <constraint firstItem="fST-1E-vsT" firstAttribute="leading" secondItem="RCu-Xv-PG6" secondAttribute="leading" id="nzQ-2Y-BSA"/>
+                            <constraint firstItem="rmA-25-bwe" firstAttribute="leading" secondItem="RCu-Xv-PG6" secondAttribute="leading" id="zqp-Sb-RWe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RCu-Xv-PG6"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="DreamtextField" destination="5x6-2o-WTx" id="DyI-IN-oMU"/>
+                        <outlet property="TopView" destination="fST-1E-vsT" id="iDk-yJ-RUk"/>
+                        <outlet property="categoryButton" destination="rmA-25-bwe" id="qad-ev-4Vg"/>
+                        <outlet property="tableView" destination="eZs-QY-ukH" id="pFB-fI-szb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O2d-Db-RUs" sceneMemberID="firstResponder"/>
+                <exit id="9Xo-Vs-ocW" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="852" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>

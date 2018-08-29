@@ -1,35 +1,33 @@
 //
-//  TaskTableViewCell.swift
+//  SecondTableViewCell.swift
 //  Book of my own adventure
 //
-//  Created by 小嶋暸太 on 2018/08/18.
+//  Created by 小嶋暸太 on 2018/08/29.
 //  Copyright © 2018年 小嶋暸太. All rights reserved.
 //
-
-protocol TableViewCellDelegate {
-    
-    // Indicates that the edit process has begun for the given cell
-    func cellDidBeginEditing(editingCell: TaskTableViewCell)
-    // Indicates that the edit process has committed for the given cell
-    func cellDidEndEditing(editingCell: TaskTableViewCell)
-}
 
 import UIKit
 import RealmSwift
 import MCSwipeTableViewCell
 
-class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
+protocol SecondTableViewCellDelegate {
+    
+    // Indicates that the edit process has begun for the given cell
+    func secondCellDidBeginEditing(editingCell: SecondTableViewCell)
+    // Indicates that the edit process has committed for the given cell
+    func secondCellDidEndEditing(editingCell: SecondTableViewCell)
+}
 
+class SecondTableViewCell: UITableViewCell,UITextViewDelegate {
+    
     @IBOutlet weak var textField: UITextView!
     
-    @IBOutlet weak var CategoryButton: UIButton!
     
-    
-    var delegate: TableViewCellDelegate?
-    var task:Task!
+    var delegate: SecondTableViewCellDelegate?
+    var task:SecondTask!
     var tableview: UITableView!
     let realm = try! Realm()
-
+    
     
     
     override func prepareForReuse() {
@@ -47,18 +45,14 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
         
         textField.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
         
-        
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
         
     }
-
-    
-    
     
     
     func setCell(){
@@ -74,9 +68,6 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
                 self.task.editCell = false
             }
         }
-        
-        let count = realm.objects(SecondTask.self).filter("category=%@",task.id).count
-        CategoryButton.setTitle(String(count), for: .normal)
         
     }
     
@@ -94,26 +85,24 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
     func textViewDidEndEditing(_ textView: UITextView) {
         
         if textField.text != ""{
-        try! realm.write {
-            self.task.text = textField.text!
+            try! realm.write {
+                self.task.text = textField.text!
             }
         }else{
-                try! realm.write {
-                    self.realm.delete(task)
-                }
+            try! realm.write {
+                self.realm.delete(task)
             }
+        }
         
         if delegate != nil {
-            delegate?.cellDidEndEditing(editingCell:self)
+            delegate?.secondCellDidEndEditing(editingCell:self)
         }
     }
     
     
-    
-    
     func textViewDidBeginEditing(_ textField: UITextView) {
         if delegate != nil {
-            delegate?.cellDidBeginEditing(editingCell:self)
+            delegate?.secondCellDidBeginEditing(editingCell:self)
         }
     }
     
@@ -122,5 +111,7 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
         tableview.endUpdates()
     }
     
+    
+
     
 }

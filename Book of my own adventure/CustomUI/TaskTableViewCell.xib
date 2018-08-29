@@ -25,24 +25,37 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-nc-AVM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="275" height="43.5"/>
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="24"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                     </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YES-dQ-AKP">
+                        <rect key="frame" x="275" y="0.0" width="45" height="43.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="45" id="hp5-j2-Wcq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="22"/>
+                        <state key="normal" title="22"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="j9m-nc-AVM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9PW-Ev-hpl"/>
                     <constraint firstAttribute="bottom" secondItem="j9m-nc-AVM" secondAttribute="bottom" id="IgW-TD-2c1"/>
-                    <constraint firstAttribute="trailing" secondItem="j9m-nc-AVM" secondAttribute="trailing" id="hjz-qb-49S"/>
+                    <constraint firstItem="YES-dQ-AKP" firstAttribute="leading" secondItem="j9m-nc-AVM" secondAttribute="trailing" id="M6y-6u-3cd"/>
+                    <constraint firstItem="YES-dQ-AKP" firstAttribute="top" secondItem="j9m-nc-AVM" secondAttribute="top" id="RnI-V8-Cy0"/>
+                    <constraint firstItem="YES-dQ-AKP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fW0-m4-sut"/>
                     <constraint firstItem="j9m-nc-AVM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="kaJ-u1-fOb"/>
+                    <constraint firstAttribute="trailing" secondItem="YES-dQ-AKP" secondAttribute="trailing" id="n7W-C1-P5P"/>
+                    <constraint firstAttribute="bottom" secondItem="YES-dQ-AKP" secondAttribute="bottom" id="vuu-Wq-Anf"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="CategoryButton" destination="YES-dQ-AKP" id="hwC-bn-bYL"/>
                 <outlet property="textField" destination="j9m-nc-AVM" id="EbP-mo-aYh"/>
             </connections>
         </tableViewCell>
