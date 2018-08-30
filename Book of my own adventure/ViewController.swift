@@ -10,8 +10,9 @@ import UIKit
 import SwiftReorder
 import RealmSwift
 import MCSwipeTableViewCell
+import BubbleTransition
 
-class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,TableViewCellDelegate,UITextFieldDelegate {
+class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,TableViewCellDelegate,UITextFieldDelegate{
     
 
     @IBOutlet weak var tableView: UITableView!
@@ -20,18 +21,23 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     let realm = try! Realm()
     let task = try! Realm().objects(Task.self).sorted(byKeyPath: "order", ascending: true)
     var cellColor: UIColor!
-    
+    let transition = BubbleTransition()
     let userDefaults:UserDefaults = UserDefaults.standard
     var taskid:Task!
     
     @IBOutlet weak var TopView: UIView!
-    @IBOutlet weak var LevelLabel: UILabel!
     @IBOutlet weak var DreamtextField: UITextField!
+    @IBOutlet weak var levelButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        if tableView.responds(to: #selector(getter: UITableViewCell.separatorInset)) {
+            tableView.separatorInset = UIEdgeInsets.zero;
+        }
+        
         
         DreamtextField.delegate = self
         
@@ -41,7 +47,7 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         tableView.rowHeight = UITableViewAutomaticDimension
         //tableviewのおおよその高さを導き出す。これでスクロールの値などが予測される
         //高さ概算値 = 「縦横比1:1のUIImageViewの高さ(=画面幅)」+「いいねボタン、キャプションラベル、その他余白の高さの合計概算(=100pt)」
-        tableView.estimatedRowHeight = 1000
+        tableView.estimatedRowHeight = 44
         
         //ステータスバーの色を変更
         let statusBar = UIView(frame:CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 20.0))
@@ -84,12 +90,33 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         tableView.reloadData()
         let dream = userDefaults.string(forKey: "DREAM")
         DreamtextField.text = dream
+        
+        let levelCount = userDefaults.integer(forKey: "LEVEL")
+        
+        levelButton.setTitle("Lv.\(levelCount)", for: .normal)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "secondSegue"{
         let secondViewController: SeondViewController! = segue.destination as! SeondViewController
         
         secondViewController.taskid = self.taskid
+        }
+        //bubbletransition
+        
+        if segue.identifier == "levelSegue"{
+        let controller = segue.destination
+        controller.transitioningDelegate = self
+        controller.modalPresentationStyle = .custom
+        }else{
+        let vc = segue.destination
+        
+        vc.modalTransitionStyle = .coverVertical
+        
+        self.present(vc, animated: true, completion: nil)
+        }
     }
     
     @IBAction func addTopButton(_ sender: Any) {
@@ -113,6 +140,12 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         
         self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
         
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: false)
+        }
+        
+        
         
         
     }
@@ -124,6 +157,8 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     
     
     @objc func addCell(){
+        
+       
         
         print("DEBUG_PRINT:addCell")
         //タスクの設定とリストの追加
@@ -141,7 +176,9 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         try! realm.write {
             self.realm.add(taskdata,update:true)
         }
+        
         self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+        
         
     }
     
@@ -169,6 +206,7 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         
         cell.tableview = self.tableView
         cell.setCell()
+        
         
         cell.CategoryButton.addTarget(self, action: #selector(handleButton(_:forEvent:)), for: .touchUpInside)
        
@@ -210,9 +248,14 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
                                                         
                                                         (action: UIAlertAction!) -> Void in
                                                         
+                                                        let deletearray = self.realm.objects(SecondTask.self).filter("category=%@",self.task[indexPath.row].id)
                                                         
                                                         try! self.realm.write {
                                                             self.realm.delete(self.task[indexPath.row])
+                                                             //下にあるタスクも削除
+                                                            for delete in deletearray{
+                                                            self.realm.delete(delete)
+                                                            }
                                                         }
                                                         //削除のアニメーション入れてから、データを更新。
                                                         UIView.animate(withDuration: 0, animations: {
@@ -242,40 +285,14 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
                                                      completionHandler(true)
         }
         destructiveAction.backgroundColor = UIColor(red: 214/255.0, green: 69/255.0, blue: 65/255.0, alpha: 1)
+        
+        let trash = UIImage(named: "trashBox")
+        
+        destructiveAction.image = trash?.scaleImage(scaleSize: 0.15)
+        
         let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
         return configuration
     }
-    
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        //チェックマークの画像を挿入予定
-        
-        let destructiveAction = UIContextualAction(style: .destructive,
-                                                   title: "") { (action, view, completionHandler) in
-                                                    completionHandler(true)
-                                                    try! self.realm.write {
-                                                        self.realm.delete(self.task[indexPath.row])
-                                                    }
-                                                    UIView.animate(withDuration: 0, animations: {
-                                                        tableView.deleteRows(at: [indexPath], with: .fade)
-                                                    }, completion: {finished in
-                                                        if (finished){
-                                                            tableView.reloadData()
-                                                        }
-                                                        
-                                                    })
-                                                    
-                                                    
-        }
-        
-        destructiveAction.backgroundColor = UIColor(red: 0, green: 255, blue: 0, alpha: 1)
-        let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
-        
-        return configuration
-    }
-    
-    
-    
-    
     
     func cellDidBeginEditing(editingCell: TaskTableViewCell) {
         

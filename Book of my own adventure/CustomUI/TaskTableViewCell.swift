@@ -17,6 +17,7 @@ protocol TableViewCellDelegate {
 import UIKit
 import RealmSwift
 import MCSwipeTableViewCell
+import BubbleTransition
 
 class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
 
@@ -29,6 +30,8 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
     var task:Task!
     var tableview: UITableView!
     let realm = try! Realm()
+    let transition = BubbleTransition()
+   
 
     
     
@@ -46,8 +49,6 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
         textField.layer.borderWidth = 0
         
         textField.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
-        
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -57,7 +58,6 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
         
     }
 
-    
     
     
     
@@ -93,18 +93,16 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
     //テキストフィールドが閉じられたら、データを追加、EndEditingを呼ぶ
     func textViewDidEndEditing(_ textView: UITextView) {
         
-        if textField.text != ""{
+        
         try! realm.write {
             self.task.text = textField.text!
             }
-        }else{
-                try! realm.write {
-                    self.realm.delete(task)
-                }
-            }
+        
         
         if delegate != nil {
             delegate?.cellDidEndEditing(editingCell:self)
+            
+            
         }
     }
     
@@ -114,6 +112,7 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
     func textViewDidBeginEditing(_ textField: UITextView) {
         if delegate != nil {
             delegate?.cellDidBeginEditing(editingCell:self)
+            
         }
     }
     

@@ -39,7 +39,7 @@
                     <constraint firstItem="wnN-Sc-hVI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="u9d-4X-18t"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.19570728207683774" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="1" green="0.30040035573044677" blue="0.25993123670793949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="textField" destination="wnN-Sc-hVI" id="Rb1-GT-Rgt"/>

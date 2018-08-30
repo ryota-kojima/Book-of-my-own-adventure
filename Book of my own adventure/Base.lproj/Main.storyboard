@@ -24,21 +24,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="6Ip-Re-9gM">
-                                <rect key="frame" x="0.0" y="73" width="375" height="594"/>
+                                <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSQ-Vb-EqM">
-                                <rect key="frame" x="0.0" y="20" width="375" height="53"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="80"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lv:5" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8v-BZ-VUz">
-                                        <rect key="frame" x="10" y="16" width="32" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aie-Vr-dld">
-                                        <rect key="frame" x="335" y="9.5" width="30" height="34"/>
+                                        <rect key="frame" x="335" y="0.0" width="30" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="uRC-My-fUK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="30"/>
                                         <state key="normal" title="＋">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -46,28 +44,45 @@
                                             <action selector="addTopButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lVY-FM-Ub7"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="自分の夢を入力しよう" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AAF-ZR-y7v">
-                                        <rect key="frame" x="52" y="0.0" width="273" height="53"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="自分の夢を入力しよう(17字まで)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AAF-ZR-y7v">
+                                        <rect key="frame" x="70" y="0.0" width="255" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="255" id="x5k-BU-OX1"/>
+                                        </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvz-RQ-Po3">
+                                        <rect key="frame" x="10" y="0.0" width="50" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="O4T-MA-wf7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="18"/>
+                                        <state key="normal" title="lv.100"/>
+                                        <connections>
+                                            <segue destination="WbX-Gl-0kf" kind="show" identifier="levelSegue" id="xlj-aN-UO5"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.6074247397846152" blue="0.2300637015773368" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="xvz-RQ-Po3" firstAttribute="top" secondItem="tSQ-Vb-EqM" secondAttribute="top" id="2FB-LC-JjT"/>
                                     <constraint firstItem="Aie-Vr-dld" firstAttribute="leading" secondItem="AAF-ZR-y7v" secondAttribute="trailing" constant="10" id="5Nx-KI-oR8"/>
-                                    <constraint firstItem="AAF-ZR-y7v" firstAttribute="centerY" secondItem="F8v-BZ-VUz" secondAttribute="centerY" id="76f-O9-RkQ"/>
                                     <constraint firstAttribute="bottom" secondItem="AAF-ZR-y7v" secondAttribute="bottom" id="Dvl-Y0-lkG"/>
-                                    <constraint firstAttribute="height" constant="53" id="JQS-pE-crQ"/>
-                                    <constraint firstItem="F8v-BZ-VUz" firstAttribute="leading" secondItem="tSQ-Vb-EqM" secondAttribute="leading" constant="10" id="LiM-jR-e1i"/>
+                                    <constraint firstAttribute="bottom" secondItem="xvz-RQ-Po3" secondAttribute="bottom" id="IJg-9X-e5G"/>
+                                    <constraint firstAttribute="height" constant="80" id="JQS-pE-crQ"/>
                                     <constraint firstAttribute="trailing" secondItem="Aie-Vr-dld" secondAttribute="trailing" constant="10" id="NOX-N5-UY5"/>
-                                    <constraint firstItem="Aie-Vr-dld" firstAttribute="centerY" secondItem="F8v-BZ-VUz" secondAttribute="centerY" id="bZY-tl-LQh"/>
+                                    <constraint firstItem="AAF-ZR-y7v" firstAttribute="leading" secondItem="xvz-RQ-Po3" secondAttribute="trailing" constant="10" id="TCP-mY-FeD"/>
+                                    <constraint firstItem="Aie-Vr-dld" firstAttribute="top" secondItem="tSQ-Vb-EqM" secondAttribute="top" id="UOq-ur-kgA"/>
+                                    <constraint firstAttribute="bottom" secondItem="Aie-Vr-dld" secondAttribute="bottom" id="XxF-Gx-Stu"/>
+                                    <constraint firstItem="xvz-RQ-Po3" firstAttribute="leading" secondItem="tSQ-Vb-EqM" secondAttribute="leading" constant="10" id="fOm-WX-vkn"/>
                                     <constraint firstItem="AAF-ZR-y7v" firstAttribute="top" secondItem="tSQ-Vb-EqM" secondAttribute="top" id="oDJ-I7-CwR"/>
-                                    <constraint firstItem="AAF-ZR-y7v" firstAttribute="leading" secondItem="F8v-BZ-VUz" secondAttribute="trailing" constant="10" id="uUt-Hg-6ZZ"/>
+                                    <constraint firstItem="AAF-ZR-y7v" firstAttribute="centerY" secondItem="xvz-RQ-Po3" secondAttribute="centerY" id="tsB-I2-0Q2"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Ip-Re-9gM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GhB-qi-Sz9"/>
                             <constraint firstAttribute="bottom" secondItem="6Ip-Re-9gM" secondAttribute="bottom" id="MVw-BT-ZZH"/>
@@ -81,8 +96,8 @@
                     </view>
                     <connections>
                         <outlet property="DreamtextField" destination="AAF-ZR-y7v" id="UZW-fi-Ucw"/>
-                        <outlet property="LevelLabel" destination="F8v-BZ-VUz" id="wy9-5A-OeZ"/>
                         <outlet property="TopView" destination="tSQ-Vb-EqM" id="A0T-PF-eza"/>
+                        <outlet property="levelButton" destination="xvz-RQ-Po3" id="PZz-Km-EKv"/>
                         <outlet property="tableView" destination="6Ip-Re-9gM" id="752-9J-W5D"/>
                         <segue destination="UG7-7x-mTl" kind="show" identifier="secondSegue" id="3wA-Bf-Ncp"/>
                     </connections>
@@ -90,6 +105,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+        <!--Level View Controller-->
+        <scene sceneID="YWf-WK-vRi">
+            <objects>
+                <viewController id="WbX-Gl-0kf" customClass="LevelViewController" customModule="Book_of_my_own_adventure" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GZR-At-6q7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ZaO-6s-9zV">
+                                <rect key="frame" x="0.0" y="135" width="375" height="532"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXN-kI-3Sy">
+                                <rect key="frame" x="0.0" y="20" width="375" height="80"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="自分の夢を入力しよう(17字まで)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KSp-iG-c1D">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.6074247398" blue="0.2300637016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="KSp-iG-c1D" firstAttribute="leading" secondItem="UXN-kI-3Sy" secondAttribute="leading" id="3ql-zE-ygO"/>
+                                    <constraint firstItem="KSp-iG-c1D" firstAttribute="top" secondItem="UXN-kI-3Sy" secondAttribute="top" id="GVQ-Hb-BHp"/>
+                                    <constraint firstAttribute="height" constant="80" id="PkF-Ny-3PG"/>
+                                    <constraint firstAttribute="bottom" secondItem="KSp-iG-c1D" secondAttribute="bottom" id="ezl-dF-r7h"/>
+                                    <constraint firstAttribute="trailing" secondItem="KSp-iG-c1D" secondAttribute="trailing" id="hWe-rW-tjC"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVq-8G-4M4">
+                                <rect key="frame" x="0.0" y="100" width="375" height="35"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="72J-VJ-EHH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="20"/>
+                                <state key="normal" title="カテゴリ"/>
+                                <connections>
+                                    <action selector="dismisshundle:" destination="WbX-Gl-0kf" eventType="touchDown" id="C2o-sS-tvi"/>
+                                    <action selector="transition:" destination="UG7-7x-mTl" eventType="touchDown" id="MoW-Rt-wj1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UXN-kI-3Sy" firstAttribute="trailing" secondItem="vkc-nq-Czi" secondAttribute="trailing" id="1cG-lO-G3u"/>
+                            <constraint firstItem="ZaO-6s-9zV" firstAttribute="leading" secondItem="vkc-nq-Czi" secondAttribute="leading" id="MHZ-0m-500"/>
+                            <constraint firstItem="ZaO-6s-9zV" firstAttribute="top" secondItem="HVq-8G-4M4" secondAttribute="bottom" id="iwd-bS-M1m"/>
+                            <constraint firstItem="UXN-kI-3Sy" firstAttribute="top" secondItem="vkc-nq-Czi" secondAttribute="top" id="m4M-xu-k7R"/>
+                            <constraint firstItem="UXN-kI-3Sy" firstAttribute="leading" secondItem="vkc-nq-Czi" secondAttribute="leading" id="mKb-r2-NnI"/>
+                            <constraint firstItem="HVq-8G-4M4" firstAttribute="top" secondItem="UXN-kI-3Sy" secondAttribute="bottom" id="pNB-Bl-DZJ"/>
+                            <constraint firstItem="HVq-8G-4M4" firstAttribute="leading" secondItem="vkc-nq-Czi" secondAttribute="leading" id="pwo-NS-Jxq"/>
+                            <constraint firstItem="ZaO-6s-9zV" firstAttribute="trailing" secondItem="vkc-nq-Czi" secondAttribute="trailing" id="riX-wM-0mp"/>
+                            <constraint firstItem="HVq-8G-4M4" firstAttribute="trailing" secondItem="vkc-nq-Czi" secondAttribute="trailing" id="uds-Zr-OQx"/>
+                            <constraint firstItem="ZaO-6s-9zV" firstAttribute="bottom" secondItem="vkc-nq-Czi" secondAttribute="bottom" id="w02-qJ-SmZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vkc-nq-Czi"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="OD4-oL-AVf"/>
+                    <connections>
+                        <outlet property="DreamtextField" destination="KSp-iG-c1D" id="7Pc-yi-LtB"/>
+                        <outlet property="categoryButton" destination="HVq-8G-4M4" id="0DQ-MP-lbw"/>
+                        <outlet property="tableView" destination="ZaO-6s-9zV" id="sB5-Ex-wkH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VbX-dj-4LI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="301.60000000000002" y="800.14992503748135"/>
         </scene>
         <!--Seond View Controller-->
         <scene sceneID="PDy-sE-RD8">
@@ -100,12 +187,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="eZs-QY-ukH">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="135" width="375" height="532"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmA-25-bwe">
-                                <rect key="frame" x="0.0" y="73" width="375" height="35"/>
+                                <rect key="frame" x="0.0" y="100" width="375" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="6ST-tr-kDU"/>
@@ -113,20 +200,29 @@
                                 <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="20"/>
                                 <state key="normal" title="カテゴリ"/>
                                 <connections>
+                                    <action selector="transition:" destination="UG7-7x-mTl" eventType="touchDown" id="kGc-vY-YXV"/>
                                     <segue destination="9Xo-Vs-ocW" kind="unwind" unwindAction="unwindWithSegue:" id="XbM-2w-fp6"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fST-1E-vsT">
-                                <rect key="frame" x="0.0" y="20" width="375" height="53"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="80"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lv:5" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xb6-z0-f4k">
-                                        <rect key="frame" x="10" y="16" width="32" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZA-B9-O7S">
+                                        <rect key="frame" x="10" y="0.0" width="50" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="FQE-iw-rDV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="22"/>
+                                        <connections>
+                                            <segue destination="WbX-Gl-0kf" kind="show" id="k7a-fl-1aK"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsX-WX-R1z">
-                                        <rect key="frame" x="335" y="9.5" width="30" height="34"/>
+                                        <rect key="frame" x="335" y="0.0" width="30" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="QHH-aa-I3o"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="28"/>
                                         <state key="normal" title="＋">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -134,24 +230,42 @@
                                             <action selector="addTopButton:" destination="UG7-7x-mTl" eventType="touchUpInside" id="3cP-Su-gM6"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="自分の夢を入力しよう" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5x6-2o-WTx">
-                                        <rect key="frame" x="52" y="0.0" width="273" height="53"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="自分の夢を入力しよう(17字まで)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5x6-2o-WTx">
+                                        <rect key="frame" x="70" y="0.0" width="255" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="255" id="Gip-4j-Jrz"/>
+                                        </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tV8-1p-GQK" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
+                                        <rect key="frame" x="10" y="0.0" width="50" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="lqN-0F-KDq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.6074247398" blue="0.2300637016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="5x6-2o-WTx" firstAttribute="centerY" secondItem="xb6-z0-f4k" secondAttribute="centerY" id="FWd-6h-JA4"/>
                                     <constraint firstItem="dsX-WX-R1z" firstAttribute="leading" secondItem="5x6-2o-WTx" secondAttribute="trailing" constant="10" id="Giq-Uj-S6i"/>
-                                    <constraint firstItem="5x6-2o-WTx" firstAttribute="leading" secondItem="xb6-z0-f4k" secondAttribute="trailing" constant="10" id="LI7-Xj-Ch8"/>
-                                    <constraint firstAttribute="height" constant="53" id="UNe-W5-3tn"/>
-                                    <constraint firstItem="dsX-WX-R1z" firstAttribute="centerY" secondItem="xb6-z0-f4k" secondAttribute="centerY" id="Ywn-XD-zhQ"/>
-                                    <constraint firstItem="xb6-z0-f4k" firstAttribute="leading" secondItem="fST-1E-vsT" secondAttribute="leading" constant="10" id="aQa-n8-DLR"/>
+                                    <constraint firstItem="DZA-B9-O7S" firstAttribute="top" secondItem="fST-1E-vsT" secondAttribute="top" id="NH0-aN-JYj"/>
+                                    <constraint firstAttribute="height" constant="80" id="UNe-W5-3tn"/>
+                                    <constraint firstAttribute="bottom" secondItem="tV8-1p-GQK" secondAttribute="bottom" id="UeH-OU-tCy"/>
+                                    <constraint firstAttribute="bottom" secondItem="dsX-WX-R1z" secondAttribute="bottom" id="Uit-cx-TRn"/>
+                                    <constraint firstItem="tV8-1p-GQK" firstAttribute="leading" secondItem="fST-1E-vsT" secondAttribute="leading" constant="10" id="VeJ-z2-n31"/>
+                                    <constraint firstItem="dsX-WX-R1z" firstAttribute="top" secondItem="fST-1E-vsT" secondAttribute="top" id="Zu7-pA-1iL"/>
+                                    <constraint firstItem="tV8-1p-GQK" firstAttribute="top" secondItem="fST-1E-vsT" secondAttribute="top" id="b1n-rN-Q9A"/>
+                                    <constraint firstItem="5x6-2o-WTx" firstAttribute="leading" secondItem="DZA-B9-O7S" secondAttribute="trailing" constant="10" id="ews-Mo-LZE"/>
                                     <constraint firstAttribute="trailing" secondItem="dsX-WX-R1z" secondAttribute="trailing" constant="10" id="hDe-Ha-g8Q"/>
                                     <constraint firstAttribute="bottom" secondItem="5x6-2o-WTx" secondAttribute="bottom" id="rOu-mu-WSX"/>
                                     <constraint firstItem="5x6-2o-WTx" firstAttribute="top" secondItem="fST-1E-vsT" secondAttribute="top" id="waN-uM-025"/>
+                                    <constraint firstItem="DZA-B9-O7S" firstAttribute="leading" secondItem="fST-1E-vsT" secondAttribute="leading" constant="10" id="yBb-DO-SwZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="DZA-B9-O7S" secondAttribute="bottom" id="zNb-l9-xrv"/>
+                                    <constraint firstItem="5x6-2o-WTx" firstAttribute="leading" secondItem="tV8-1p-GQK" secondAttribute="trailing" constant="10" id="zig-1z-TRN"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -175,6 +289,8 @@
                         <outlet property="DreamtextField" destination="5x6-2o-WTx" id="DyI-IN-oMU"/>
                         <outlet property="TopView" destination="fST-1E-vsT" id="iDk-yJ-RUk"/>
                         <outlet property="categoryButton" destination="rmA-25-bwe" id="qad-ev-4Vg"/>
+                        <outlet property="levelButton" destination="DZA-B9-O7S" id="lPe-lF-gpZ"/>
+                        <outlet property="levelLaebl" destination="tV8-1p-GQK" id="Jbv-SB-94k"/>
                         <outlet property="tableView" destination="eZs-QY-ukH" id="pFB-fI-szb"/>
                     </connections>
                 </viewController>
@@ -184,4 +300,7 @@
             <point key="canvasLocation" x="852" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="k7a-fl-1aK"/>
+    </inferredMetricsTieBreakers>
 </document>

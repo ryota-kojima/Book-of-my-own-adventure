@@ -10,9 +10,11 @@ import UIKit
 import SwiftReorder
 import RealmSwift
 import MCSwipeTableViewCell
+import BubbleTransition
+import LTMorphingLabel
 
 
-class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,TableViewReorderDelegate,SecondTableViewCellDelegate {
+class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,TableViewReorderDelegate,SecondTableViewCellDelegate,LTMorphingLabelDelegate {
     
     @IBOutlet weak var TopView: UIView!
     
@@ -22,6 +24,13 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
     
     @IBOutlet weak var categoryButton: UIButton!
     
+    @IBOutlet weak var levelButton: UIButton!
+    
+    @IBOutlet weak var levelLaebl: LTMorphingLabel!
+    
+    
+    
+    let transition = BubbleTransition()
     //Realmのインスタンス
     let realm = try! Realm()
     var task = try! Realm().objects(SecondTask.self).sorted(byKeyPath: "order", ascending: true)
@@ -36,11 +45,10 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //task = realm.objects(Task.self).filter("category=%@",taskid.categoryId).sorted(byKeyPath: "order", ascending: true)
-        
-        //categoryButton.titleLabel?.text = taskid.categoryId
         
         DreamtextField.delegate = self
+        
+        
         
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 175, right: 0)
         
@@ -48,7 +56,7 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         tableView.rowHeight = UITableViewAutomaticDimension
         //tableviewのおおよその高さを導き出す。これでスクロールの値などが予測される
         //高さ概算値 = 「縦横比1:1のUIImageViewの高さ(=画面幅)」+「いいねボタン、キャプションラベル、その他余白の高さの合計概算(=100pt)」
-        tableView.estimatedRowHeight = 1000
+        tableView.estimatedRowHeight = 44
         
         //ステータスバーの色を変更
         let statusBar = UIView(frame:CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 20.0))
@@ -88,6 +96,12 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         //tableView.reloadData()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination
+        controller.transitioningDelegate = self
+        controller.modalPresentationStyle = .custom
+    }
+    
     @IBAction func addTopButton(_ sender: Any) {
         
         print("DEBUG_PRINT:addCell")
@@ -101,6 +115,7 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
             taskdata.order = allTask.min(ofProperty: "order")!-1
         }
         
+        //おやたすくのIDをカテゴリ名とする
         taskdata.editCell = true
         taskdata.category = taskid.id
         
@@ -109,6 +124,11 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         }
         
         self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+        
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: false)
+        }
     }
     
     
@@ -133,7 +153,14 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         let dream = userDefaults.string(forKey: "DREAM")
         if dream != nil{
         DreamtextField.text = dream
+        
+            
         }
+        
+        let levelCount = userDefaults.integer(forKey: "LEVEL")
+        
+        levelLaebl.text = "Lv.\(levelCount)"
+        
         
         task = realm.objects(SecondTask.self).filter("category=%@",taskid.id).sorted(byKeyPath: "order", ascending: true)
         
@@ -203,8 +230,9 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let destructiveAction = UIContextualAction(style: .destructive,
-                                                   title: "Delete") { (action, view, completionHandler) in
+                                                   title: "") { (action, view, completionHandler) in
                                                     completionHandler(true)
+                                                    
                                                     try! self.realm.write {
                                                         self.realm.delete(self.task[indexPath.row])
                                                     }
@@ -214,10 +242,16 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
                                                     }, completion: {finished in
                                                         if (finished){
                                                             tableView.reloadData()
+                                                            
                                                         }
                                                     })
+                                                    
+                                                    
         }
         
+        let trash = UIImage(named: "trashBox")
+        
+        destructiveAction.image = trash?.scaleImage(scaleSize: 0.15)
         let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
         
         return configuration
@@ -230,8 +264,19 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
                                                    title: "") { (action, view, completionHandler) in
                                                     completionHandler(true)
                                                     try! self.realm.write {
-                                                        self.realm.delete(self.task[indexPath.row])
+                                                        self.task[indexPath.row].check = 1
+                                                        self.task[indexPath.row].category = 999999
+                                                        //カテゴリーからは消したいが、次に追加されるものと被らないようするため
                                                     }
+                                                    
+                                                    var levelCount = self.userDefaults.integer(forKey: "LEVEL")
+                                                    levelCount += 1 //レベルアップ
+                                                    self.userDefaults.set(levelCount, forKey: "LEVEL")
+                                                    
+                                                    self.levelLaebl.morphingEffect = .sparkle
+
+                                                    self.levelLaebl.text = "Lv.\(levelCount)"
+                                                    
                                                     UIView.animate(withDuration: 0, animations: {
                                                         tableView.deleteRows(at: [indexPath], with: .fade)
                                                     }, completion: {finished in
@@ -245,6 +290,10 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         }
         
         destructiveAction.backgroundColor = UIColor(red: 0, green: 255, blue: 0, alpha: 1)
+        
+        let Check = UIImage(named: "check")
+        destructiveAction.image = Check?.scaleImage(scaleSize: 0.4)
+        
         let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
         
         return configuration
@@ -259,7 +308,6 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         
         DispatchQueue.main.async {
             
-            print("瀬cおんど")
             
             let editingOffset = self.tableView.contentOffset.y - editingCell.frame.origin.y as CGFloat
             let visibleCells = self.tableView.visibleCells as! [SecondTableViewCell]
@@ -308,6 +356,9 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
     }
     
 
+    @IBAction func transition(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 
     /*

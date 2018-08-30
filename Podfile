@@ -10,4 +10,19 @@ target 'Book of my own adventure' do
     pod'SwiftReorder', '~> 3.0'
     pod 'RealmSwift', '3.7.4'
     pod 'MCSwipeTableViewCell','2.1.4'
+    pod 'BubbleTransition'
+    pod 'LTMorphingLabel' 
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+target.build_configurations.each do |configuration|
+    configuration.build_settings['SWIFT_VERSION'] = "4.0"
+
 end
+
+end
+
+end
+
+end
+

@@ -12,6 +12,16 @@
 		2B73041521367BDE0022E64D /* SecondTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B73041321367BDE0022E64D /* SecondTableViewCell.xib */; };
 		2B7304192136BA460022E64D /* husen.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7304182136BA460022E64D /* husen.png */; };
 		2B73041B2136C2660022E64D /* SecondTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73041A2136C2660022E64D /* SecondTask.swift */; };
+		2B73041D2136EA930022E64D /* bubbletransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73041C2136EA930022E64D /* bubbletransition.swift */; };
+		2B73041F213702DE0022E64D /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73041E213702DE0022E64D /* LevelViewController.swift */; };
+		2B730422213707BA0022E64D /* CheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B730420213707BA0022E64D /* CheckTableViewCell.swift */; };
+		2B730423213707BA0022E64D /* CheckTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B730421213707BA0022E64D /* CheckTableViewCell.xib */; };
+		2B7304252137AAA80022E64D /* KH-Dot-Kodenmachou-16.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B7304242137AAA80022E64D /* KH-Dot-Kodenmachou-16.ttf */; };
+		2B730427213801850022E64D /* peddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B730426213801850022E64D /* peddingLabel.swift */; };
+		2B730429213809CC0022E64D /* trashBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B730428213809CC0022E64D /* trashBox.png */; };
+		2B73042B21380B7C0022E64D /* imageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73042A21380B7C0022E64D /* imageResize.swift */; };
+		2B73042D213810FC0022E64D /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B73042C213810FB0022E64D /* check.png */; };
+		2B73042F213813570022E64D /* redtrashBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B73042E213813560022E64D /* redtrashBox.png */; };
 		2BEC6EF82127377C002A0D35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6EF72127377C002A0D35 /* AppDelegate.swift */; };
 		2BEC6EFA2127377C002A0D35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC6EF92127377C002A0D35 /* ViewController.swift */; };
 		2BEC6EFD2127377C002A0D35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC6EFB2127377C002A0D35 /* Main.storyboard */; };
@@ -32,6 +42,16 @@
 		2B73041321367BDE0022E64D /* SecondTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondTableViewCell.xib; sourceTree = "<group>"; };
 		2B7304182136BA460022E64D /* husen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = husen.png; path = ../../../../../Downloads/husen.png; sourceTree = "<group>"; };
 		2B73041A2136C2660022E64D /* SecondTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTask.swift; sourceTree = "<group>"; };
+		2B73041C2136EA930022E64D /* bubbletransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bubbletransition.swift; sourceTree = "<group>"; };
+		2B73041E213702DE0022E64D /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
+		2B730420213707BA0022E64D /* CheckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTableViewCell.swift; sourceTree = "<group>"; };
+		2B730421213707BA0022E64D /* CheckTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckTableViewCell.xib; sourceTree = "<group>"; };
+		2B7304242137AAA80022E64D /* KH-Dot-Kodenmachou-16.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KH-Dot-Kodenmachou-16.ttf"; sourceTree = "<group>"; };
+		2B730426213801850022E64D /* peddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = peddingLabel.swift; sourceTree = "<group>"; };
+		2B730428213809CC0022E64D /* trashBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trashBox.png; sourceTree = "<group>"; };
+		2B73042A21380B7C0022E64D /* imageResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageResize.swift; sourceTree = "<group>"; };
+		2B73042C213810FB0022E64D /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
+		2B73042E213813560022E64D /* redtrashBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redtrashBox.png; sourceTree = "<group>"; };
 		2BEC6EF42127377C002A0D35 /* Book of my own adventure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Book of my own adventure.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEC6EF72127377C002A0D35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BEC6EF92127377C002A0D35 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +123,11 @@
 				2BEC6F16212AB59E002A0D35 /* komorebi-gothic-P.ttf */,
 				2B73040E2135A4510022E64D /* SeondViewController.swift */,
 				2B7304182136BA460022E64D /* husen.png */,
+				2B7304242137AAA80022E64D /* KH-Dot-Kodenmachou-16.ttf */,
+				2B73042E213813560022E64D /* redtrashBox.png */,
+				2B730428213809CC0022E64D /* trashBox.png */,
+				2B73042C213810FB0022E64D /* check.png */,
+				2B73041E213702DE0022E64D /* LevelViewController.swift */,
 			);
 			path = "Book of my own adventure";
 			sourceTree = "<group>";
@@ -111,7 +136,9 @@
 			isa = PBXGroup;
 			children = (
 				2BEC6F0A2127487B002A0D35 /* tableviewDrangSort.swift */,
+				2B73041C2136EA930022E64D /* bubbletransition.swift */,
 				2BEC6F14212AAFDA002A0D35 /* TableviewHeader0.swift */,
+				2B73042A21380B7C0022E64D /* imageResize.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -132,6 +159,9 @@
 				2BEC6F112127BC08002A0D35 /* TaskTableViewCell.xib */,
 				2B73041221367BDE0022E64D /* SecondTableViewCell.swift */,
 				2B73041321367BDE0022E64D /* SecondTableViewCell.xib */,
+				2B730420213707BA0022E64D /* CheckTableViewCell.swift */,
+				2B730421213707BA0022E64D /* CheckTableViewCell.xib */,
+				2B730426213801850022E64D /* peddingLabel.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -205,10 +235,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B7304252137AAA80022E64D /* KH-Dot-Kodenmachou-16.ttf in Resources */,
+				2B730423213707BA0022E64D /* CheckTableViewCell.xib in Resources */,
 				2BEC6F132127BC08002A0D35 /* TaskTableViewCell.xib in Resources */,
 				2B73041521367BDE0022E64D /* SecondTableViewCell.xib in Resources */,
+				2B73042F213813570022E64D /* redtrashBox.png in Resources */,
+				2B73042D213810FC0022E64D /* check.png in Resources */,
 				2B7304192136BA460022E64D /* husen.png in Resources */,
 				2BEC6F022127377D002A0D35 /* LaunchScreen.storyboard in Resources */,
+				2B730429213809CC0022E64D /* trashBox.png in Resources */,
 				2BEC6EFF2127377D002A0D35 /* Assets.xcassets in Resources */,
 				2BEC6EFD2127377C002A0D35 /* Main.storyboard in Resources */,
 				2BEC6F17212AB59E002A0D35 /* komorebi-gothic-P.ttf in Resources */,
@@ -243,6 +278,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Book of my own adventure/Pods-Book of my own adventure-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BubbleTransition/BubbleTransition.framework",
+				"${BUILT_PRODUCTS_DIR}/LTMorphingLabel/LTMorphingLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/MCSwipeTableViewCell/MCSwipeTableViewCell.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -250,6 +287,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BubbleTransition.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTMorphingLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MCSwipeTableViewCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -267,12 +306,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B730422213707BA0022E64D /* CheckTableViewCell.swift in Sources */,
+				2B73041F213702DE0022E64D /* LevelViewController.swift in Sources */,
 				2B73041B2136C2660022E64D /* SecondTask.swift in Sources */,
+				2B73042B21380B7C0022E64D /* imageResize.swift in Sources */,
 				2BEC6F0E2127B80B002A0D35 /* Task.swift in Sources */,
 				2BEC6F15212AAFDA002A0D35 /* TableviewHeader0.swift in Sources */,
+				2B730427213801850022E64D /* peddingLabel.swift in Sources */,
 				2B73040F2135A4510022E64D /* SeondViewController.swift in Sources */,
 				2B73041421367BDE0022E64D /* SecondTableViewCell.swift in Sources */,
 				2BEC6F0B2127487B002A0D35 /* tableviewDrangSort.swift in Sources */,
+				2B73041D2136EA930022E64D /* bubbletransition.swift in Sources */,
 				2BEC6F122127BC08002A0D35 /* TaskTableViewCell.swift in Sources */,
 				2BEC6EFA2127377C002A0D35 /* ViewController.swift in Sources */,
 				2BEC6EF82127377C002A0D35 /* AppDelegate.swift in Sources */,

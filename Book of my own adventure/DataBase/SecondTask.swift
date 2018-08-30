@@ -18,6 +18,8 @@ class SecondTask:Object{
     
     @objc dynamic var order = 0
     
+    @objc dynamic var check = 0
+    
     @objc dynamic var editCell = false
     
     @objc dynamic var date=Date()
