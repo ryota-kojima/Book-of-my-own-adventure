@@ -42,6 +42,7 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
     var taskid: Task!
     var nowEditing = false
     
+    
    
     
     override func viewDidLoad() {
@@ -353,18 +354,24 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
                                                     //バイブを鳴らす
                                                     self.shortVibrate()
                                                     
-                                                    let allTask = self.realm.objects(SecondTask.self).filter("check=1")
+                                                    let taskData = self.task[indexPath.row]
+                                                    
                                                     
                                                     
                                                     try! self.realm.write {
-                                                        self.task[indexPath.row].check = 1
-                                                        self.task[indexPath.row].category = 999999
+                                                        
+                                                        taskData.category = 999999
                                                         //カテゴリーからは消したいが、次に追加されるものと被らないようするため
                                                         
-                                                        if allTask.count != 0{
+                                                        let checkTask = self.realm.objects(SecondTask.self).filter("check=1")
+                                                        
+                                                        if checkTask.count != 0{
                                                             
-                                                            self.task[indexPath.row].order = allTask.min(ofProperty: "order")!-1
+                                                            taskData.order = checkTask.min(ofProperty: "order")!-1
                                                         }//levelviewで達成した順に上から表示されるようにする
+                                                        
+                                                        taskData.check = 1
+                                                        
                                                         
                                                     }
                                                     

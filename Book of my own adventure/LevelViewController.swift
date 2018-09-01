@@ -21,6 +21,12 @@ class LevelViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var trashButton: UIButton!
+    
+    @IBOutlet weak var resetButton: UIButton!
+    
+    
+    
     let realm = try! Realm()
     let task = try! Realm().objects(SecondTask.self).filter("check=1").sorted(byKeyPath: "order", ascending: true)
     let userDefaults:UserDefaults = UserDefaults.standard
@@ -31,6 +37,9 @@ class LevelViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         if tableView.responds(to: #selector(getter: UITableViewCell.separatorInset)) {
             tableView.separatorInset = UIEdgeInsets.zero;
         }
+     
+        
+       
         
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 175, right: 0)
         
@@ -156,6 +165,96 @@ class LevelViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return .leastNormalMagnitude
+    }
+    
+    
+    @IBAction func leveReset(_ sender: Any) {
+        
+        // ① UIAlertControllerクラスのインスタンスを生成
+        // タイトル, メッセージ, Alertのスタイルを指定する
+        // 第3引数のpreferredStyleでアラートの表示スタイルを指定する
+        let alert: UIAlertController = UIAlertController(title: "はじめからボタン", message: "Lv.を0からやり直しますか？", preferredStyle:  UIAlertControllerStyle.alert)
+        
+        // ② Actionの設定
+        // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
+        // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
+        // OKボタン
+        let okAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            
+            (action: UIAlertAction!) -> Void in
+            
+            var levelCount = self.userDefaults.integer(forKey: "LEVEL")
+            levelCount = 0 //レベルリセット
+            self.userDefaults.set(levelCount, forKey: "LEVEL")
+            
+            self.categoryButton.setTitle("冒険の記録：（Lv\(levelCount)）", for: .normal)
+            
+        })
+        
+        // キャンセルボタン
+        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            
+        })
+        
+        // ③ UIAlertControllerにActionを追加
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        
+        // ④ Alertを表示
+        self.present(alert, animated: true, completion: nil)
+        
+        
+
+        
+    }
+    
+    @IBAction func allTrash(_ sender: Any) {
+        
+        // ① UIAlertControllerクラスのインスタンスを生成
+        // タイトル, メッセージ, Alertのスタイルを指定する
+        // 第3引数のpreferredStyleでアラートの表示スタイルを指定する
+        let alert: UIAlertController = UIAlertController(title: "すべての記録が削除されます", message: "削除してもよろしいですか？", preferredStyle:  UIAlertControllerStyle.alert)
+        
+        // ② Actionの設定
+        // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
+        // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
+        // OKボタン
+        let okAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            
+            (action: UIAlertAction!) -> Void in
+            
+            
+            try! self.realm.write {
+               
+                //下にあるタスクも削除
+                for delete in self.task{
+                    self.realm.delete(delete)
+                }
+            }
+            
+                    self.tableView.reloadData()
+        })
+        
+        // キャンセルボタン
+        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            
+        })
+        
+        // ③ UIAlertControllerにActionを追加
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        
+        // ④ Alertを表示
+        self.present(alert, animated: true, completion: nil)
+        
+        
+        
     }
     
     
