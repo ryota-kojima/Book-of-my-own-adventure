@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B35854D213910C500CD99A2 /* TanukiMagic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B35854C213910C400CD99A2 /* TanukiMagic.ttf */; };
+		2B35854F21391A8A00CD99A2 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35854E21391A8A00CD99A2 /* ShadowView.swift */; };
+		2B3585532139477D00CD99A2 /* aosuisai.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B3585522139477D00CD99A2 /* aosuisai.png */; };
+		2B3585552139483200CD99A2 /* tya.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B3585542139483200CD99A2 /* tya.jpg */; };
+		2B35855721394B1A00CD99A2 /* ao.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B35855621394B1900CD99A2 /* ao.png */; };
+		2B35855B21397C7F00CD99A2 /* OriginalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B35855A21397C7F00CD99A2 /* OriginalTextView.swift */; };
 		2B73040F2135A4510022E64D /* SeondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73040E2135A4510022E64D /* SeondViewController.swift */; };
 		2B73041421367BDE0022E64D /* SecondTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73041221367BDE0022E64D /* SecondTableViewCell.swift */; };
 		2B73041521367BDE0022E64D /* SecondTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B73041321367BDE0022E64D /* SecondTableViewCell.xib */; };
@@ -37,6 +43,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B35854C213910C400CD99A2 /* TanukiMagic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TanukiMagic.ttf; sourceTree = "<group>"; };
+		2B35854E21391A8A00CD99A2 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		2B3585522139477D00CD99A2 /* aosuisai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aosuisai.png; path = ../../../../../Downloads/aosuisai.png; sourceTree = "<group>"; };
+		2B3585542139483200CD99A2 /* tya.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tya.jpg; sourceTree = "<group>"; };
+		2B35855621394B1900CD99A2 /* ao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ao.png; sourceTree = "<group>"; };
+		2B35855821397C1A00CD99A2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		2B35855921397C1A00CD99A2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2B35855A21397C7F00CD99A2 /* OriginalTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalTextView.swift; sourceTree = "<group>"; };
 		2B73040E2135A4510022E64D /* SeondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeondViewController.swift; sourceTree = "<group>"; };
 		2B73041221367BDE0022E64D /* SecondTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTableViewCell.swift; sourceTree = "<group>"; };
 		2B73041321367BDE0022E64D /* SecondTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondTableViewCell.xib; sourceTree = "<group>"; };
@@ -125,8 +139,12 @@
 				2B7304182136BA460022E64D /* husen.png */,
 				2B7304242137AAA80022E64D /* KH-Dot-Kodenmachou-16.ttf */,
 				2B73042E213813560022E64D /* redtrashBox.png */,
+				2B35854C213910C400CD99A2 /* TanukiMagic.ttf */,
 				2B730428213809CC0022E64D /* trashBox.png */,
+				2B3585542139483200CD99A2 /* tya.jpg */,
 				2B73042C213810FB0022E64D /* check.png */,
+				2B35855621394B1900CD99A2 /* ao.png */,
+				2B3585522139477D00CD99A2 /* aosuisai.png */,
 				2B73041E213702DE0022E64D /* LevelViewController.swift */,
 			);
 			path = "Book of my own adventure";
@@ -139,6 +157,7 @@
 				2B73041C2136EA930022E64D /* bubbletransition.swift */,
 				2BEC6F14212AAFDA002A0D35 /* TableviewHeader0.swift */,
 				2B73042A21380B7C0022E64D /* imageResize.swift */,
+				2B35854E21391A8A00CD99A2 /* ShadowView.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -162,6 +181,7 @@
 				2B730420213707BA0022E64D /* CheckTableViewCell.swift */,
 				2B730421213707BA0022E64D /* CheckTableViewCell.xib */,
 				2B730426213801850022E64D /* peddingLabel.swift */,
+				2B35855A21397C7F00CD99A2 /* OriginalTextView.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -238,15 +258,19 @@
 				2B7304252137AAA80022E64D /* KH-Dot-Kodenmachou-16.ttf in Resources */,
 				2B730423213707BA0022E64D /* CheckTableViewCell.xib in Resources */,
 				2BEC6F132127BC08002A0D35 /* TaskTableViewCell.xib in Resources */,
+				2B3585552139483200CD99A2 /* tya.jpg in Resources */,
 				2B73041521367BDE0022E64D /* SecondTableViewCell.xib in Resources */,
 				2B73042F213813570022E64D /* redtrashBox.png in Resources */,
+				2B35854D213910C500CD99A2 /* TanukiMagic.ttf in Resources */,
 				2B73042D213810FC0022E64D /* check.png in Resources */,
 				2B7304192136BA460022E64D /* husen.png in Resources */,
+				2B35855721394B1A00CD99A2 /* ao.png in Resources */,
 				2BEC6F022127377D002A0D35 /* LaunchScreen.storyboard in Resources */,
 				2B730429213809CC0022E64D /* trashBox.png in Resources */,
 				2BEC6EFF2127377D002A0D35 /* Assets.xcassets in Resources */,
 				2BEC6EFD2127377C002A0D35 /* Main.storyboard in Resources */,
 				2BEC6F17212AB59E002A0D35 /* komorebi-gothic-P.ttf in Resources */,
+				2B3585532139477D00CD99A2 /* aosuisai.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,9 +336,11 @@
 				2B73042B21380B7C0022E64D /* imageResize.swift in Sources */,
 				2BEC6F0E2127B80B002A0D35 /* Task.swift in Sources */,
 				2BEC6F15212AAFDA002A0D35 /* TableviewHeader0.swift in Sources */,
+				2B35855B21397C7F00CD99A2 /* OriginalTextView.swift in Sources */,
 				2B730427213801850022E64D /* peddingLabel.swift in Sources */,
 				2B73040F2135A4510022E64D /* SeondViewController.swift in Sources */,
 				2B73041421367BDE0022E64D /* SecondTableViewCell.swift in Sources */,
+				2B35854F21391A8A00CD99A2 /* ShadowView.swift in Sources */,
 				2BEC6F0B2127487B002A0D35 /* tableviewDrangSort.swift in Sources */,
 				2B73041D2136EA930022E64D /* bubbletransition.swift in Sources */,
 				2BEC6F122127BC08002A0D35 /* TaskTableViewCell.swift in Sources */,
@@ -330,6 +356,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2BEC6EFC2127377C002A0D35 /* Base */,
+				2B35855821397C1A00CD99A2 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -338,6 +365,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2BEC6F012127377D002A0D35 /* Base */,
+				2B35855921397C1A00CD99A2 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -349,6 +377,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -409,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

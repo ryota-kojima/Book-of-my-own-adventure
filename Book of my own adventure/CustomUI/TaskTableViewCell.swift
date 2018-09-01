@@ -21,22 +21,24 @@ import BubbleTransition
 
 class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
 
+    
     @IBOutlet weak var textField: UITextView!
     
-    @IBOutlet weak var CategoryButton: UIButton!
+    @IBOutlet weak var insertButton: UIButton!
     
+    @IBOutlet weak var CategoryButton: UIButton!
     
     var delegate: TableViewCellDelegate?
     var task:Task!
     var tableview: UITableView!
     let realm = try! Realm()
     let transition = BubbleTransition()
-   
 
-    
-    
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         textField.delegate = self
+        textField.isEditable = true
     }
     
     
@@ -45,11 +47,16 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
         // Initialization code
         
         textField.delegate = self
-        textField.font = UIFont.boldSystemFont(ofSize: CGFloat(24))
+        textField.font = UIFont.boldSystemFont(ofSize: CGFloat(20))
         textField.layer.borderWidth = 0
         
-        textField.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
+        textField.textContainerInset = UIEdgeInsets(top: 14, left: 10, bottom: 14, right: 10)
+            
+        
     }
+    
+   
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -68,11 +75,13 @@ class TaskTableViewCell: UITableViewCell,UITextViewDelegate{
             
             print("呼ばれたで")
             
+            
             self.textField.becomeFirstResponder()
             
             try! realm.write {
                 self.task.editCell = false
             }
+            
         }
         
         let count = realm.objects(SecondTask.self).filter("category=%@",task.id).count

@@ -22,6 +22,7 @@ class SecondTableViewCell: UITableViewCell,UITextViewDelegate {
     
     @IBOutlet weak var textField: UITextView!
     
+    @IBOutlet weak var insertButton: UIButton!
     
     var delegate: SecondTableViewCellDelegate?
     var task:SecondTask!
@@ -31,7 +32,9 @@ class SecondTableViewCell: UITableViewCell,UITextViewDelegate {
     
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         textField.delegate = self
+        textField.isEditable = true
     }
     
     
@@ -40,10 +43,10 @@ class SecondTableViewCell: UITableViewCell,UITextViewDelegate {
         // Initialization code
         
         textField.delegate = self
-        textField.font = UIFont.boldSystemFont(ofSize: CGFloat(24))
+        textField.font = UIFont.boldSystemFont(ofSize: CGFloat(20))
         textField.layer.borderWidth = 0
         
-        textField.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
+        textField.textContainerInset = UIEdgeInsets(top: 14, left: 10, bottom: 14, right: 10)
         
     }
     
@@ -64,6 +67,7 @@ class SecondTableViewCell: UITableViewCell,UITextViewDelegate {
             
             self.textField.becomeFirstResponder()
             
+            self.textField.text = "▶︎"
             try! realm.write {
                 self.task.editCell = false
             }
@@ -84,12 +88,12 @@ class SecondTableViewCell: UITableViewCell,UITextViewDelegate {
     //テキストフィールドが閉じられたら、データを追加、EndEditingを呼ぶ
     func textViewDidEndEditing(_ textView: UITextView) {
         
-        if textField.text != ""{
+        if textField.text != "" && textField.text != "▶︎"{
             try! realm.write {
                 self.task.text = textField.text!
             }
         }else{
-            try! realm.write {
+            try! self.realm.write {
                 self.realm.delete(task)
             }
         }

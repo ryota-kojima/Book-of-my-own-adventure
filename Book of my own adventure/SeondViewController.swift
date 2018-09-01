@@ -12,6 +12,7 @@ import RealmSwift
 import MCSwipeTableViewCell
 import BubbleTransition
 import LTMorphingLabel
+import  AudioToolbox
 
 
 class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,TableViewReorderDelegate,SecondTableViewCellDelegate,LTMorphingLabelDelegate {
@@ -39,6 +40,7 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
     let userDefaults:UserDefaults = UserDefaults.standard
     
     var taskid: Task!
+    var nowEditing = false
     
    
     
@@ -48,6 +50,21 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         
         DreamtextField.delegate = self
         
+        let rightBorder = CALayer()
+        rightBorder.frame = CGRect(x: DreamtextField.frame.width+3, y: 0, width: 0.5, height:DreamtextField.frame.height)
+        rightBorder.backgroundColor = UIColor.darkGray.cgColor
+        
+        let leftBorder = CALayer()
+        leftBorder.frame = CGRect(x: -3, y: 0, width: 0.3, height:DreamtextField.frame.height)
+        leftBorder.backgroundColor = UIColor.darkGray.cgColor
+        
+        DreamtextField.layer.addSublayer(rightBorder)
+        DreamtextField.layer.addSublayer(leftBorder)
+        
+        //separateを端まで引く
+        if tableView.responds(to: #selector(getter: UITableViewCell.separatorInset)) {
+            tableView.separatorInset = UIEdgeInsets.zero;
+        }
         
         
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 175, right: 0)
@@ -103,6 +120,12 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
     }
     
     @IBAction func addTopButton(_ sender: Any) {
+        
+        if nowEditing == true{
+            self.view.endEditing(true)
+            return
+        }
+        
         
         print("DEBUG_PRINT:addCell")
         //タスクの設定とリストの追加
@@ -171,6 +194,11 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
     
     @objc func addCell(){
         
+        if nowEditing == true{
+            self.view.endEditing(true)
+            return
+        }
+        
         print("DEBUG_PRINT:addCell")
         //タスクの設定とリストの追加
         let taskdata = SecondTask()
@@ -221,9 +249,66 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         cell.tableview = self.tableView
         cell.setCell()
         
+        cell.insertButton.addTarget(self, action: #selector(insertCell(_:forEvent:)), for: .touchUpInside)
+        
         
         
         return cell
+    }
+    
+    @objc func insertCell(_ sender:UIButton, forEvent event: UIEvent){
+        if nowEditing == true{
+            self.view.endEditing(true)
+            return
+        }
+        
+        let touch = event.allTouches?.first
+        let point = touch?.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: point!)
+        
+        let taskdata = SecondTask()
+        
+        let allTask = realm.objects(SecondTask.self)
+        if allTask.count != 0{
+            taskdata.id = allTask.max(ofProperty: "id")!+1
+            
+            if indexPath!.row != 0{
+            
+            try! realm.write {
+                
+                let destinationorder = task[indexPath!.row-1].order
+            
+                // 下から上に移動した場合、間の項目を下にシフト
+                for indexrow in 0 ... indexPath!.row-1{
+                    let object = task[indexrow]
+                    object.order -= 1
+                    }
+            
+            // 移動したセルの並びを移動先に更新
+                taskdata.order = destinationorder
+                }
+                
+            }else{
+                
+                
+                try! realm.write {
+                    
+                    taskdata.order = allTask.min(ofProperty: "order")!-1
+                }
+        }
+}
+        
+        
+        taskdata.editCell = true
+        taskdata.category = taskid.id
+        
+        try! realm.write {
+            self.realm.add(taskdata,update:true)
+        }
+        self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+        
+        
+        
     }
     
     
@@ -252,6 +337,7 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         let trash = UIImage(named: "trashBox")
         
         destructiveAction.image = trash?.scaleImage(scaleSize: 0.15)
+        destructiveAction.backgroundColor = UIColor(red: 244, green: 0, blue: 0, alpha: 0)
         let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
         
         return configuration
@@ -263,10 +349,23 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         let destructiveAction = UIContextualAction(style: .destructive,
                                                    title: "") { (action, view, completionHandler) in
                                                     completionHandler(true)
+                                                    
+                                                    //バイブを鳴らす
+                                                    self.shortVibrate()
+                                                    
+                                                    let allTask = self.realm.objects(SecondTask.self).filter("check=1")
+                                                    
+                                                    
                                                     try! self.realm.write {
                                                         self.task[indexPath.row].check = 1
                                                         self.task[indexPath.row].category = 999999
                                                         //カテゴリーからは消したいが、次に追加されるものと被らないようするため
+                                                        
+                                                        if allTask.count != 0{
+                                                            
+                                                            self.task[indexPath.row].order = allTask.min(ofProperty: "order")!-1
+                                                        }//levelviewで達成した順に上から表示されるようにする
+                                                        
                                                     }
                                                     
                                                     var levelCount = self.userDefaults.integer(forKey: "LEVEL")
@@ -276,6 +375,9 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
                                                     self.levelLaebl.morphingEffect = .sparkle
 
                                                     self.levelLaebl.text = "Lv.\(levelCount)"
+                                                    
+                                                    
+                                                    
                                                     
                                                     UIView.animate(withDuration: 0, animations: {
                                                         tableView.deleteRows(at: [indexPath], with: .fade)
@@ -305,6 +407,7 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
     
     func secondCellDidBeginEditing(editingCell: SecondTableViewCell) {
         
+        nowEditing = true
         
         DispatchQueue.main.async {
             
@@ -333,6 +436,8 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
     
     func secondCellDidEndEditing(editingCell: SecondTableViewCell) {
         
+        nowEditing = false
+        
         let visibleCells = tableView.visibleCells as! [SecondTableViewCell]
         let lastView = visibleCells[visibleCells.count - 1] as SecondTableViewCell
         
@@ -360,6 +465,9 @@ class SeondViewController: UIViewController,UITextFieldDelegate,UITableViewDeleg
         self.dismiss(animated: true, completion: nil)
     }
     
+    func shortVibrate() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
 
     /*
     // MARK: - Navigation

@@ -25,28 +25,48 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-nc-AVM">
-                        <rect key="frame" x="0.0" y="0.0" width="275" height="43.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="270" height="43.5"/>
                         <gestureRecognizers/>
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="24"/>
+                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="21"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                     </textView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YES-dQ-AKP">
-                        <rect key="frame" x="275" y="0.0" width="45" height="43.5"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dh-qt-MCe">
+                        <rect key="frame" x="0.0" y="0.0" width="30" height="43"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="45" id="hp5-j2-Wcq"/>
+                            <constraint firstAttribute="width" constant="30" id="XNL-l9-Vki"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="22"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YES-dQ-AKP">
+                        <rect key="frame" x="270" y="0.0" width="50" height="43.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="hp5-j2-Wcq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="18"/>
                         <state key="normal" title="22"/>
                     </button>
+                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T17-Pc-pSs">
+                        <rect key="frame" x="0.0" y="43" width="320" height="1"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.29999999999999999" id="kJS-7v-tAu"/>
+                        </constraints>
+                    </view>
                 </subviews>
+                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
+                    <constraint firstItem="8dh-qt-MCe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5hn-Gk-weQ"/>
                     <constraint firstItem="j9m-nc-AVM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9PW-Ev-hpl"/>
                     <constraint firstAttribute="bottom" secondItem="j9m-nc-AVM" secondAttribute="bottom" id="IgW-TD-2c1"/>
                     <constraint firstItem="YES-dQ-AKP" firstAttribute="leading" secondItem="j9m-nc-AVM" secondAttribute="trailing" id="M6y-6u-3cd"/>
+                    <constraint firstAttribute="bottom" secondItem="T17-Pc-pSs" secondAttribute="bottom" id="PNl-pz-6FI"/>
                     <constraint firstItem="YES-dQ-AKP" firstAttribute="top" secondItem="j9m-nc-AVM" secondAttribute="top" id="RnI-V8-Cy0"/>
+                    <constraint firstAttribute="trailing" secondItem="T17-Pc-pSs" secondAttribute="trailing" id="Xc1-41-0KD"/>
+                    <constraint firstItem="T17-Pc-pSs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YVp-yE-PlA"/>
+                    <constraint firstItem="T17-Pc-pSs" firstAttribute="top" secondItem="8dh-qt-MCe" secondAttribute="bottom" id="bIm-hu-cvo"/>
                     <constraint firstItem="YES-dQ-AKP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fW0-m4-sut"/>
+                    <constraint firstItem="8dh-qt-MCe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hh7-mi-PZ9"/>
                     <constraint firstItem="j9m-nc-AVM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="kaJ-u1-fOb"/>
                     <constraint firstAttribute="trailing" secondItem="YES-dQ-AKP" secondAttribute="trailing" id="n7W-C1-P5P"/>
                     <constraint firstAttribute="bottom" secondItem="YES-dQ-AKP" secondAttribute="bottom" id="vuu-Wq-Anf"/>
@@ -57,8 +77,10 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="CategoryButton" destination="YES-dQ-AKP" id="hwC-bn-bYL"/>
-                <outlet property="textField" destination="j9m-nc-AVM" id="EbP-mo-aYh"/>
+                <outlet property="insertButton" destination="8dh-qt-MCe" id="hGF-ob-QKP"/>
+                <outlet property="textField" destination="j9m-nc-AVM" id="d88-ud-Gdz"/>
             </connections>
+            <point key="canvasLocation" x="16" y="54"/>
         </tableViewCell>
     </objects>
 </document>

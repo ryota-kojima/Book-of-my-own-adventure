@@ -18,7 +18,7 @@ class CheckTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     
-        textLavel.font = UIFont.boldSystemFont(ofSize: CGFloat(24))
+        textLavel.font = UIFont.boldSystemFont(ofSize: CGFloat(20))
         textLavel.layer.borderWidth = 0
         
         

@@ -26,22 +26,43 @@
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnN-Sc-hVI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" name="komorebi-gothic-P" family="komorebi gothic P" pointSize="24"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                     </textView>
+                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MU7-eJ-oNZ">
+                        <rect key="frame" x="0.0" y="42.5" width="320" height="1"/>
+                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.29999999999999999" id="udO-TF-cNZ"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYj-z7-TuY">
+                        <rect key="frame" x="0.0" y="0.0" width="30" height="42.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="TQ7-iO-Dbv"/>
+                        </constraints>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="MU7-eJ-oNZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0fc-v8-ZNZ"/>
                     <constraint firstAttribute="bottom" secondItem="wnN-Sc-hVI" secondAttribute="bottom" id="1Lp-Fy-3IU"/>
+                    <constraint firstAttribute="bottom" secondItem="MU7-eJ-oNZ" secondAttribute="bottom" id="KGz-N1-abN"/>
+                    <constraint firstItem="MU7-eJ-oNZ" firstAttribute="top" secondItem="IYj-z7-TuY" secondAttribute="bottom" id="KMq-Qs-ON8"/>
+                    <constraint firstItem="IYj-z7-TuY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="MQV-Qh-Zxo"/>
                     <constraint firstItem="wnN-Sc-hVI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="PNe-ny-tMx"/>
+                    <constraint firstAttribute="trailing" secondItem="MU7-eJ-oNZ" secondAttribute="trailing" id="QgX-B8-KIR"/>
                     <constraint firstAttribute="trailing" secondItem="wnN-Sc-hVI" secondAttribute="trailing" id="hPM-MV-puV"/>
                     <constraint firstItem="wnN-Sc-hVI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="u9d-4X-18t"/>
+                    <constraint firstItem="IYj-z7-TuY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vnN-vF-eYQ"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="1" green="0.30040035573044677" blue="0.25993123670793949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="insertButton" destination="IYj-z7-TuY" id="34J-Iq-i4j"/>
                 <outlet property="textField" destination="wnN-Sc-hVI" id="Rb1-GT-Rgt"/>
             </connections>
         </tableViewCell>

@@ -11,6 +11,7 @@ import SwiftReorder
 import RealmSwift
 import MCSwipeTableViewCell
 import BubbleTransition
+import AudioToolbox
 
 class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,TableViewCellDelegate,UITextFieldDelegate{
     
@@ -24,6 +25,7 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     let transition = BubbleTransition()
     let userDefaults:UserDefaults = UserDefaults.standard
     var taskid:Task!
+    var nowEditing = false
     
     @IBOutlet weak var TopView: UIView!
     @IBOutlet weak var DreamtextField: UITextField!
@@ -34,9 +36,26 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        
+        let rightBorder = CALayer()
+        rightBorder.frame = CGRect(x: DreamtextField.frame.width+3, y: 0, width: 0.5, height:DreamtextField.frame.height)
+        rightBorder.backgroundColor = UIColor.darkGray.cgColor
+        
+        let leftBorder = CALayer()
+        leftBorder.frame = CGRect(x: -3, y: 0, width: 0.3, height:DreamtextField.frame.height)
+        leftBorder.backgroundColor = UIColor.darkGray.cgColor
+        
+        DreamtextField.layer.addSublayer(rightBorder)
+        DreamtextField.layer.addSublayer(leftBorder)
+
+        //separateを端まで引く
         if tableView.responds(to: #selector(getter: UITableViewCell.separatorInset)) {
             tableView.separatorInset = UIEdgeInsets.zero;
         }
+        //ボタンの幅に合わせてフォントサイズを変える
+        levelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        
         
         
         DreamtextField.delegate = self
@@ -121,6 +140,11 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     
     @IBAction func addTopButton(_ sender: Any) {
         
+        if nowEditing == true{
+            self.view.endEditing(true)
+            return
+        }
+        
         print("DEBUG_PRINT:addCell")
         //タスクの設定とリストの追加
         let taskdata = Task()
@@ -138,11 +162,14 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
             self.realm.add(taskdata,update:true)
         }
         
+        
         self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+        
         
         DispatchQueue.main.async {
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: false)
+            
         }
         
         
@@ -158,7 +185,11 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     
     @objc func addCell(){
         
-       
+        if nowEditing == true{
+            
+            self.view.endEditing(true)
+            return
+        }
         
         print("DEBUG_PRINT:addCell")
         //タスクの設定とリストの追加
@@ -209,12 +240,70 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
         
         
         cell.CategoryButton.addTarget(self, action: #selector(handleButton(_:forEvent:)), for: .touchUpInside)
-       
+        cell.insertButton.addTarget(self, action: #selector(insertCell(_:forEvent:)), for: .touchUpInside)
+
         
         return cell
     }
     
+    @objc func insertCell(_ sender:UIButton, forEvent event: UIEvent){
+        if nowEditing == true{
+            self.view.endEditing(true)
+            return
+        }
+        
+        let touch = event.allTouches?.first
+        let point = touch?.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: point!)
+        
+        let taskdata = Task()
+        
+        let allTask = realm.objects(Task.self)
+        if allTask.count != 0{
+            taskdata.id = allTask.max(ofProperty: "id")!+1
+            
+            if indexPath!.row != 0{
+                
+                try! realm.write {
+                    
+                    let destinationorder = task[indexPath!.row-1].order
+                    
+                    // 下から上に移動した場合、間の項目を下にシフト
+                    for indexrow in 0 ... indexPath!.row-1{
+                        let object = task[indexrow]
+                        object.order -= 1
+                    }
+                    
+                    // 移動したセルの並びを移動先に更新
+                    taskdata.order = destinationorder
+                }
+                
+            }else{
+                
+                
+                try! realm.write {
+                    
+                    taskdata.order = allTask.min(ofProperty: "order")!-1
+                }
+            }
+        }
+        
+        taskdata.editCell = true
+       
+        
+        try! realm.write {
+            self.realm.add(taskdata,update:true)
+        }
+        self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+        
+    }
+    
     @objc func handleButton(_ sender:UIButton, forEvent event: UIEvent){
+        
+        if nowEditing == true{
+            self.view.endEditing(true)
+            return
+        }
         
         let touch = event.allTouches?.first
         let point = touch?.location(in: self.tableView)
@@ -231,7 +320,7 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let destructiveAction = UIContextualAction(style: .normal,
-                                                   title: "Delete") { (action, view, completionHandler) in
+                                                   title: "") { (action, view, completionHandler) in
                                                 
                                                     
                                                     // ① UIAlertControllerクラスのインスタンスを生成
@@ -296,6 +385,7 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     
     func cellDidBeginEditing(editingCell: TaskTableViewCell) {
         
+        nowEditing = true
         
         DispatchQueue.main.async {
             
@@ -324,6 +414,8 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
     
     func cellDidEndEditing(editingCell: TaskTableViewCell) {
         
+        nowEditing = false
+        
         let visibleCells = tableView.visibleCells as! [TaskTableViewCell]
         let lastView = visibleCells[visibleCells.count - 1] as TaskTableViewCell
         
@@ -345,5 +437,7 @@ class ViewController:UIViewController,UITableViewDelegate,UITableViewDataSource,
             })
         }
     }
+    
+    
 
 }
